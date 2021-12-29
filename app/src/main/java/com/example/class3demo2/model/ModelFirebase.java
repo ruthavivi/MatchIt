@@ -28,7 +28,7 @@ public class ModelFirebase {
     }
 
     public void getAllTeachers(Long since, Model.GetAllTeachersListener listener) {
-        db.collection("students")
+        db.collection("teachers")
                 .whereGreaterThanOrEqualTo(Teacher.LAST_UPDATED,new Timestamp(since, 0))
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
