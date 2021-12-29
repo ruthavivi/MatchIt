@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/firstPageFragment">
+
+    <fragment
+        android:id="@+id/teachersListFragment"
+        android:name="com.example.class3demo2.TeachersListFragment"
+        android:label="Teacher List"
+        tools:layout="@layout/fragment_teachers_list">
+        <action
+            android:id="@+id/action_studentsListFragment_to_studentDetailsFragment2"
+            app:destination="@id/teacherDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherDetailsFragment"
+        android:name="com.example.class3demo2.TeacherDetailsFragment"
+        android:label="Teacher Details"
+        tools:layout="@layout/fragment_teacher_details">
+        <argument
+            android:name="studentId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_teacherDetailsFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTeacherFragment"
+        android:name="com.example.class3demo2.AddTeacherFragment"
+        android:label="Add Teacher"
+        tools:layout="@layout/fragment_add_teacher"/><action android:id="@+id/action_global_addTeacherFragment" app:destination="@id/addTeacherFragment"/>
+    <fragment
+        android:id="@+id/firstPageFragment"
+        android:name="com.example.class3demo2.FirstPageFragment"
+        android:label="fragment_first_page"
+        tools:layout="@layout/fragment_first_page" >
+        <action
+            android:id="@+id/action_firstPageFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.class3demo2.logInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="com.example.class3demo2.EditFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" />
+    <fragment
+        android:id="@+id/contactInfoFragment"
+        android:name="com.example.class3demo2.ContactInfoFragment"
+        android:label="fragment_contact_info"
+        tools:layout="@layout/fragment_contact_info" >
+        <argument
+            android:name="teacherId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.class3demo2.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment" />
+    <action android:id="@+id/action_global_teachersListFragment" app:destination="@id/teachersListFragment" />
+</navigation>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/activity_base.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_add_teacher.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_contact_info.xml" value="0.264" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_edit.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_first_page.xml" value="0.2" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_log_in.xml" value="0.264" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_search.xml" value="0.2" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_teacher_details.xml" value="0.1" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_teachers_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/teacher_list_row.xml" value="0.264" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/menu/base_menu.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/layout/activity_base.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_student_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_student_list_rv_acivity.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_main_drawer.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_add_student.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_student_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_students_list.xml" value="0.1949939210570739" />
+        <entry key="app/src/main/res/layout/student_list_row.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/base_activity_menu.xml" value="0.625" />
+        <entry key="app/src/main/res/menu/base_menu.xml" value="0.11481481481481481" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

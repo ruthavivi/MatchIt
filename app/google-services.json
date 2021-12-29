@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "391506566126",
+    "project_id": "sce-android-2021",
+    "storage_bucket": "sce-android-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391506566126:android:ec54f3da70edd7935a8cff",
+        "android_client_info": {
+          "package_name": "com.example.class3demo2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391506566126-64menfaas503plqbmekls02u1g61o957.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoSEzKq5LgW5yVOwIZWsPL_qbu6i2M3bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391506566126-64menfaas503plqbmekls02u1g61o957.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
