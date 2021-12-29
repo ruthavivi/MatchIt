@@ -39,6 +39,7 @@ public class BaseActivity extends AppCompatActivity {
                 case android.R.id.home:
                     navCtrl.navigateUp();
                     return true;
+
                 case R.id.menu_settings:
 //                    SettingsDialogFragment dialog = new SettingsDialogFragment();
                     DatePickerFragment dialog = new DatePickerFragment();
