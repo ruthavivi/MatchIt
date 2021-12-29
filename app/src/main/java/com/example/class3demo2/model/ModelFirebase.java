@@ -56,7 +56,7 @@ public class ModelFirebase {
     }
 
     public void addTeacher(Teacher teacher, Model.AddTeacherListener listener) {
-        db.collection("students")
+        db.collection("teachers")
                 .document(teacher.getId()).set(teacher.toJson())
                 .addOnSuccessListener((successListener)-> {
                     listener.onComplete();
@@ -67,7 +67,7 @@ public class ModelFirebase {
     }
 
     public void getTeacherById(String teacherId, Model.GetTeacherByIdListener listener) {
-        DocumentReference docRef = db.collection("students").document(teacherId);
+        DocumentReference docRef = db.collection("teachers").document(teacherId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
