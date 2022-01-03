@@ -101,12 +101,14 @@ public class TeachersListFragment extends Fragment {
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nameTv;
+
         TextView idTv;
         CheckBox cb;
 
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             nameTv = itemView.findViewById(R.id.listrow_name_tv);
+
             idTv = itemView.findViewById(R.id.listrow_id_tv);
             cb = itemView.findViewById(R.id.listrow_cb);
             itemView.setOnClickListener(new View.OnClickListener() {

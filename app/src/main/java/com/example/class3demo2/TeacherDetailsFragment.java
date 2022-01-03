@@ -18,6 +18,8 @@ import com.example.class3demo2.model.Teacher;
 public class TeacherDetailsFragment extends Fragment {
     Teacher teacher;
     TextView nameTv;
+    TextView emailTv;
+    TextView passwordTv;
     TextView idTv;
     ProgressBar progressBar;
     Button machIt;
@@ -30,6 +32,8 @@ public class TeacherDetailsFragment extends Fragment {
 
 
         nameTv = view.findViewById(R.id.studentdetails_name_tv);
+        passwordTv = view.findViewById(R.id.studentdetails_password_tv);
+        emailTv = view.findViewById(R.id.studentdetails_email_tv);
         idTv = view.findViewById(R.id.studentdetails_id_tv);
         progressBar = view.findViewById(R.id.studentdetails_progressbar);
         progressBar.setVisibility(View.VISIBLE);
@@ -61,6 +65,8 @@ public class TeacherDetailsFragment extends Fragment {
     private void updateDisplay(Teacher teacher) {
         this.teacher = teacher;
         nameTv.setText(teacher.getName());
+        emailTv.setText(teacher.getEmail());
+        passwordTv.setText(teacher.getPassword());
         idTv.setText(teacher.getId());
         progressBar.setVisibility(View.GONE);
     }

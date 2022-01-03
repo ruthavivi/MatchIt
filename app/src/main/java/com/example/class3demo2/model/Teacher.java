@@ -23,7 +23,9 @@ public class Teacher {
     @PrimaryKey
     @NonNull
     String id = "";
+    String email = "";
     String name = "";
+    String password = "";
     boolean flag = false;
     Long lastUpdated = new Long(0);
 
@@ -36,11 +38,22 @@ public class Teacher {
     }
 
     public Teacher(){}
-    public Teacher(String name, String id, boolean flag) {
+    public Teacher(String name, String id, boolean flag,String email,String password) {
         this.name = name;
+        this.password=password;
         this.id = id;
         this.flag = flag;
+        this.email=email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     public void setId(String id) {
         this.id = id;
@@ -58,6 +71,14 @@ public class Teacher {
         return name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public String getId() {
         return id;
     }
@@ -70,6 +91,8 @@ public class Teacher {
         Map<String, Object> json = new HashMap<>();
         json.put(ID, getId());
         json.put("name", getName());
+        json.put("password", getPassword());
+        json.put("email", getEmail());
         json.put("flag", isFlag());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
 
@@ -82,8 +105,10 @@ public class Teacher {
             return null;
         }
         String name = (String)json.get("name");
+        String password = (String)json.get("password");
+        String email = (String)json.get("email");
         boolean flag = (boolean)json.get("flag");
-        Teacher teacher = new Teacher(name,id,flag);
+        Teacher teacher = new Teacher(name,id,flag,email,password);
         Timestamp ts = (Timestamp)json.get(LAST_UPDATED);
         teacher.setLastUpdated(new Long(ts.getSeconds()));
         return teacher;
