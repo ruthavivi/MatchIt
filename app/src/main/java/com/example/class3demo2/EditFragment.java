@@ -50,12 +50,6 @@ public class EditFragment extends Fragment {
             updateDisplay(teacher);
         });
 
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
 
@@ -76,15 +70,15 @@ public class EditFragment extends Fragment {
             }
         });
 
-//        deleteBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Model.instance.deleteTeacher(teacher,()->{
-//                    Navigation.findNavController(view).navigateUp();
-//                });
-//
-//            }
-//        });
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Model.instance.deleteTeacher(teacher,()->{
+                    Navigation.findNavController(view).navigateUp();
+                });
+
+            }
+        });
 
 
 
