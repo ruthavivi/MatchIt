@@ -69,12 +69,7 @@ public class Model {
             reloadTeachersList();
             listener.onComplete();
         });
-//        MyApplication.executorService.execute(()->{
-//            AppLocalDB.db.teacherDao().insertAll(teacher);
-//            MyApplication.mainHandler.post(()->{
-//                listener.onComplete();
-//            });
-//        });
+
     }
 
     public interface GetTeacherByIdListener {
@@ -82,11 +77,6 @@ public class Model {
     }
     public void getTeacherById(String teacherId, GetTeacherByIdListener listener) {
         modelFirebase.getTeacherById(teacherId, listener);
-//        MyApplication.executorService.execute(()->{
-//            Teacher student = AppLocalDB.db.teacherDao().getTeacherById(teacherId);
-//            MyApplication.mainHandler.post(()->{
-//                listener.onComplete(student);
-//            });
-//        });
+//
     }
 }

@@ -3,8 +3,10 @@ package com.example.class3demo2;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +26,14 @@ public class TeacherDetailsFragment extends Fragment {
     ProgressBar progressBar;
     Button machIt;
     Button cancel;
+    Button edit;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_teacher_details, container, false);
+
 
 
         nameTv = view.findViewById(R.id.studentdetails_name_tv);
@@ -39,10 +44,12 @@ public class TeacherDetailsFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
         machIt=view.findViewById(R.id.matchIt_btn);
         cancel=view.findViewById(R.id.cancel_btn);
+        edit = view.findViewById(R.id.edit_btn);
 
-        String studentId = TeacherDetailsFragmentArgs.fromBundle(getArguments()).getStudentId();
-        Model.instance.getTeacherById(studentId, (student)->{
-            updateDisplay(student);
+
+        String TeacherId = TeacherDetailsFragmentArgs.fromBundle(getArguments()).getTeacherId();
+        Model.instance.getTeacherById(TeacherId, (teacher)->{
+            updateDisplay(teacher);
         });
 
         if (teacher != null){
@@ -50,8 +57,23 @@ public class TeacherDetailsFragment extends Fragment {
         }
 
 
+
+
+
+        //edit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_teacherDetailsFragment_to_editFragment));
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TeacherDetailsFragmentDirections.ActionTeacherDetailsFragmentToEditFragment action = TeacherDetailsFragmentDirections.actionTeacherDetailsFragmentToEditFragment(TeacherId);
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+
+
+
         machIt.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_teacherDetailsFragment_to_contactInfoFragment));
-        Button cancel=view.findViewById(R.id.cancel_btn);
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

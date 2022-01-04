@@ -20,11 +20,14 @@
         android:label="Teacher Details"
         tools:layout="@layout/fragment_teacher_details">
         <argument
-            android:name="studentId"
+            android:name="teacherId"
             app:argType="string" />
         <action
             android:id="@+id/action_teacherDetailsFragment_to_contactInfoFragment"
             app:destination="@id/contactInfoFragment" />
+        <action
+            android:id="@+id/action_teacherDetailsFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTeacherFragment"
@@ -44,16 +47,16 @@
         android:id="@+id/logInFragment"
         android:name="com.example.class3demo2.logInFragment"
         android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" >
-        <action
-            android:id="@+id/action_logInFragment_to_editFragment"
-            app:destination="@id/editFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_log_in" />
     <fragment
         android:id="@+id/editFragment"
         android:name="com.example.class3demo2.EditFragment"
         android:label="fragment_edit"
-        tools:layout="@layout/fragment_edit" />
+        tools:layout="@layout/fragment_edit" >
+        <argument
+            android:name="teacherId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/contactInfoFragment"
         android:name="com.example.class3demo2.ContactInfoFragment"
@@ -70,4 +73,5 @@
         tools:layout="@layout/fragment_search" />
     <action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment" />
     <action android:id="@+id/action_global_teachersListFragment" app:destination="@id/teachersListFragment" />
+    <action android:id="@+id/action_global_editFragment" app:destination="@id/editFragment" />
 </navigation>

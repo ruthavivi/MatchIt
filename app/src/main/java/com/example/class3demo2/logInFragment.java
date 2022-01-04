@@ -18,9 +18,9 @@ public class logInFragment extends Fragment {
 
         View view =inflater.inflate(R.layout.fragment_log_in, container, false);
         // Inflate the layout for this fragment
-
-        Button logIn = view.findViewById(R.id.login);
-        logIn.setOnClickListener(Navigation.createNavigateOnClickListener(logInFragmentDirections.actionLogInFragmentToEditFragment()));
+//
+//        Button logIn = view.findViewById(R.id.login);
+//        logIn.setOnClickListener(Navigation.createNavigateOnClickListener(logInFragmentDirections.actionGlobalEditFragment()));
 
         Button register = view.findViewById(R.id.register);
         register.setOnClickListener(Navigation.createNavigateOnClickListener(logInFragmentDirections.actionGlobalAddTeacherFragment()));
