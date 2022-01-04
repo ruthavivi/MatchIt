@@ -60,7 +60,7 @@ public class TeacherDetailsFragment extends Fragment {
 
 
 
-        //edit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_teacherDetailsFragment_to_editFragment));
+
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override

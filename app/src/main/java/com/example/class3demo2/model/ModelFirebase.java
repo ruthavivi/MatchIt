@@ -66,6 +66,17 @@ public class ModelFirebase {
                 });
     }
 
+    public void deleteTeacher(Teacher teacher, Model.DeleteTeacherListener listener) {
+        db.collection("teachers")
+                .document(teacher.getId()).delete()
+                .addOnSuccessListener((successListener)-> {
+                    listener.onComplete();
+                })
+                .addOnFailureListener((e)-> {
+                    Log.d("TAG", e.getMessage());
+                });
+    }
+
     public void getTeacherById(String teacherId, Model.GetTeacherByIdListener listener) {
         DocumentReference docRef = db.collection("teachers").document(teacherId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

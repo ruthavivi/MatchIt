@@ -50,6 +50,13 @@ public class EditFragment extends Fragment {
             updateDisplay(teacher);
         });
 
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
 
 
@@ -68,6 +75,18 @@ public class EditFragment extends Fragment {
                 save();
             }
         });
+
+//        deleteBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Model.instance.deleteTeacher(teacher,()->{
+//                    Navigation.findNavController(view).navigateUp();
+//                });
+//
+//            }
+//        });
+
+
 
 
 
@@ -90,11 +109,8 @@ public class EditFragment extends Fragment {
 
     private void updateDisplay(Teacher teacher) {
         this.teacher = teacher;
-//        nameTv.setText(teacher.getName());
-//        emailTv.setText(teacher.getEmail());
-//        passwordTv.setText(teacher.getPassword());
-//        idTv.setText(teacher.getId());
-//        progressBar.setVisibility(View.GONE);
+
+
     }
 
 

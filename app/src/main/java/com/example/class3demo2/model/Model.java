@@ -72,6 +72,18 @@ public class Model {
 
     }
 
+
+    public interface DeleteTeacherListener {
+        void onComplete();
+    }
+    public void deleteTeacher(Teacher teacher, DeleteTeacherListener listener){
+        modelFirebase.deleteTeacher(teacher,()->{
+            reloadTeachersList();
+            listener.onComplete();
+        });
+
+    }
+
     public interface GetTeacherByIdListener {
         void onComplete(Teacher teacher);
     }
