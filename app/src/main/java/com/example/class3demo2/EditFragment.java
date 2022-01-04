@@ -24,7 +24,6 @@ public class EditFragment extends Fragment {
     EditText emailEt;
     CheckBox cb;
     View view;
-    ProgressBar progressbar;
     Button saveBtn;
     Button cancelBtn;
     Button deleteBtn;
@@ -74,7 +73,9 @@ public class EditFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Model.instance.deleteTeacher(teacher,()->{
-                    Navigation.findNavController(view).navigateUp();
+                    //Navigation.findNavController(view).navigateUp();
+                    Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
+
                 });
 
             }

@@ -56,6 +56,10 @@
         <argument
             android:name="teacherId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_editFragment_pop"
+            app:popUpTo="@id/teachersListFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/contactInfoFragment"

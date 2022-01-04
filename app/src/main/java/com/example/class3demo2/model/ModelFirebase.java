@@ -18,6 +18,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.LinkedList;
 
 public class ModelFirebase {
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ModelFirebase(){
