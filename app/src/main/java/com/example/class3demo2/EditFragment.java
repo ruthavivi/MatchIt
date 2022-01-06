@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.class3demo2.model.Model;
 import com.example.class3demo2.model.Teacher;
@@ -19,7 +20,6 @@ import com.example.class3demo2.model.Teacher;
 
 public class EditFragment extends Fragment {
     EditText nameEt;
-    EditText idEt;
     EditText passwordEt;
     EditText emailEt;
     CheckBox cb;
@@ -30,34 +30,31 @@ public class EditFragment extends Fragment {
     Teacher teacher;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_edit, container, false);
+        view = inflater.inflate(R.layout.fragment_edit, container, false);
         saveBtn = view.findViewById(R.id.save_btn);
         cancelBtn = view.findViewById(R.id.cancel_btn);
         deleteBtn = view.findViewById(R.id.delete_btn);
-        nameEt=view.findViewById(R.id.edit_name_et);
-        idEt=view.findViewById(R.id.edit_id_et);
-        passwordEt=view.findViewById(R.id.edit_password_et);
-        emailEt=view.findViewById(R.id.edit_email_et);
+        nameEt = view.findViewById(R.id.edit_name_et);
+        passwordEt = view.findViewById(R.id.edit_password_et);
+        emailEt = view.findViewById(R.id.edit_email_et);
+        cb = view.findViewById(R.id.main_cb);
 
-        String TeacherId = EditFragmentArgs.fromBundle(getArguments()).getTeacherId();
-        Model.instance.getTeacherById(TeacherId, (teacher)->{
-            updateDisplay(teacher);
+        String teacherId = EditFragmentArgs.fromBundle(getArguments()).getTeacherId();
+        Model.instance.getTeacherById(teacherId, (teacher) -> {
+            this.teacher = teacher;
+            updateDisplay();
         });
-
-
-
-
 
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancel();
+
+                Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
             }
         });
 
@@ -66,13 +63,14 @@ public class EditFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 save();
+                Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
             }
         });
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Model.instance.deleteTeacher(teacher,()->{
+                Model.instance.deleteTeacher(teacher, () -> {
                     //Navigation.findNavController(view).navigateUp();
                     Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
 
@@ -82,37 +80,39 @@ public class EditFragment extends Fragment {
         });
 
 
-
-
-
-
-
         return view;
 
     }
 
-    private void cancel() {
-        Navigation.findNavController(view).popBackStack();
-    }
+
 
     private void save() {
+        teacher.updateTeacher(
+                nameEt.getText().toString(),
+                cb.isChecked(),
+                emailEt.getText().toString(),
+                passwordEt.getText().toString());
 
+        Model.instance.updateTeacher(teacher, new Model.UpdateTeacherListener() {
+            @Override
+            public void onComplete() {
+                Navigation.createNavigateOnClickListener(EditFragmentDirections.actionGlobalTeachersListFragment());
+            }
 
-        Navigation.createNavigateOnClickListener(EditFragmentDirections.actionGlobalSearchFragment());
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(getContext(), "Failed to update teacher: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
-    private void updateDisplay(Teacher teacher) {
-        this.teacher = teacher;
-
-
+    private void updateDisplay() {
+        nameEt.setText(teacher.getName());
+        emailEt.setText(teacher.getEmail());
+        passwordEt.setText(teacher.getPassword());
+        cb.setChecked(teacher.isFlag());
     }
-
-
-
-
-
-
 
 
 }

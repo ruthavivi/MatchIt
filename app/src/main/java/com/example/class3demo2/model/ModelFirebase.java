@@ -21,7 +21,7 @@ public class ModelFirebase {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public ModelFirebase(){
+    public ModelFirebase() {
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
@@ -30,19 +30,19 @@ public class ModelFirebase {
 
     public void getAllTeachers(Long since, Model.GetAllTeachersListener listener) {
         db.collection("teachers")
-                .whereGreaterThanOrEqualTo(Teacher.LAST_UPDATED,new Timestamp(since, 0))
+                .whereGreaterThanOrEqualTo(Teacher.LAST_UPDATED, new Timestamp(since, 0))
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 LinkedList<Teacher> teachersList = new LinkedList<Teacher>();
-                if(task.isSuccessful()){
-                    for (QueryDocumentSnapshot doc: task.getResult()){
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot doc : task.getResult()) {
                         Teacher s = Teacher.fromJson(doc.getData());
                         if (s != null) {
                             teachersList.add(s);
                         }
                     }
-                }else{
+                } else {
 
                 }
                 listener.onComplete(teachersList);
@@ -59,10 +59,10 @@ public class ModelFirebase {
     public void addTeacher(Teacher teacher, Model.AddTeacherListener listener) {
         db.collection("teachers")
                 .document(teacher.getId()).set(teacher.toJson())
-                .addOnSuccessListener((successListener)-> {
+                .addOnSuccessListener((successListener) -> {
                     listener.onComplete();
                 })
-                .addOnFailureListener((e)-> {
+                .addOnFailureListener((e) -> {
                     Log.d("TAG", e.getMessage());
                 });
     }
@@ -70,10 +70,10 @@ public class ModelFirebase {
     public void deleteTeacher(Teacher teacher, Model.DeleteTeacherListener listener) {
         db.collection("teachers")
                 .document(teacher.getId()).delete()
-                .addOnSuccessListener((successListener)-> {
+                .addOnSuccessListener((successListener) -> {
                     listener.onComplete();
                 })
-                .addOnFailureListener((e)-> {
+                .addOnFailureListener((e) -> {
                     Log.d("TAG", e.getMessage());
                 });
     }
@@ -85,6 +85,7 @@ public class ModelFirebase {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
+
                     if (document.exists()) {
                         Teacher s = Teacher.fromJson(document.getData());
                         listener.onComplete(s);
@@ -97,5 +98,19 @@ public class ModelFirebase {
                 }
             }
         });
+    }
+
+    public void updateTeacher(Teacher teacher, Model.UpdateTeacherListener listener) {
+        DocumentReference docRef = db.collection("teachers").document(teacher.getId());
+        docRef.update(teacher.toJson())
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        listener.onComplete();
+                    }else{
+                        listener.onError(task.getException());
+                        Log.d("TAG", "get failed with ", task.getException());
+                    }
+                });
+
     }
 }

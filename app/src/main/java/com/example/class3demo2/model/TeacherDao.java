@@ -6,6 +6,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
+
 import java.util.List;
 
 @Dao
@@ -18,6 +20,9 @@ public interface TeacherDao {
 
     @Delete
     void delete(Teacher teacher);
+
+    @Update
+    void updateTeacher(Teacher teacher);
 
     @Query("SELECT * FROM Teacher WHERE id=:id ")
     Teacher getTeacherById(String id);

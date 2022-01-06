@@ -46,6 +46,13 @@ public class Teacher {
         this.email=email;
     }
 
+    public void updateTeacher(String name, boolean flag,String email,String password){
+        this.name = name;
+        this.password=password;
+        this.flag = flag;
+        this.email=email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -95,7 +102,6 @@ public class Teacher {
         json.put("email", getEmail());
         json.put("flag", isFlag());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
-
         return json;
     }
 
@@ -107,7 +113,7 @@ public class Teacher {
         String name = (String)json.get("name");
         String password = (String)json.get("password");
         String email = (String)json.get("email");
-        boolean flag = (boolean)json.get("flag");
+        boolean flag = (Boolean) json.get("flag");
         Teacher teacher = new Teacher(name,id,flag,email,password);
         Timestamp ts = (Timestamp)json.get(LAST_UPDATED);
         teacher.setLastUpdated(new Long(ts.getSeconds()));

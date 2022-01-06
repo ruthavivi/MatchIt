@@ -78,8 +78,13 @@ public class Model {
     }
     public void deleteTeacher(Teacher teacher, DeleteTeacherListener listener){
         modelFirebase.deleteTeacher(teacher,()->{
-            reloadTeachersList();
-            listener.onComplete();
+            MyApplication.executorService.execute(() -> {
+                AppLocalDB.db.teacherDao().delete(teacher);
+                MyApplication.mainHandler.post(() -> {
+                    reloadTeachersList();
+                    listener.onComplete();
+                });
+            });
         });
 
     }
@@ -88,7 +93,39 @@ public class Model {
         void onComplete(Teacher teacher);
     }
     public void getTeacherById(String teacherId, GetTeacherByIdListener listener) {
-        modelFirebase.getTeacherById(teacherId, listener);
-//
+        MyApplication.executorService.execute(() -> {
+          Teacher teacher = AppLocalDB.db.teacherDao().getTeacherById(teacherId);
+          MyApplication.mainHandler.post(() -> {
+              if(teacher!= null){
+                  listener.onComplete(teacher);
+                  return;
+              }
+              modelFirebase.getTeacherById(teacherId, listener);
+          });
+        });
+    }
+
+    public interface UpdateTeacherListener {
+        void onComplete();
+        void onError(Exception e);
+    }
+    public void updateTeacher(Teacher teacher,UpdateTeacherListener listener){
+        modelFirebase.updateTeacher(teacher, new UpdateTeacherListener() {
+            @Override
+            public void onComplete() {
+                MyApplication.executorService.execute(() -> {
+                    AppLocalDB.db.teacherDao().updateTeacher(teacher);
+                    MyApplication.mainHandler.post(() -> {
+                        reloadTeachersList();
+                        listener.onComplete();
+                    });
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                listener.onError(e);
+            }
+        });
     }
 }
