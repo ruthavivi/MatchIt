@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.class3demo2.model.Model;
+import com.example.class3demo2.model.ModelFirebase;
+
 
 public class SearchFragment extends Fragment {
 
@@ -32,6 +35,8 @@ public class SearchFragment extends Fragment {
         });
 
         Button search = view.findViewById(R.id.search_btn);
+
+
         search.setOnClickListener(Navigation.createNavigateOnClickListener(SearchFragmentDirections.actionGlobalTeachersListFragment()));
 
 

@@ -22,6 +22,7 @@ public class EditFragment extends Fragment {
     EditText nameEt;
     EditText passwordEt;
     EditText emailEt;
+    EditText locationEt;
     CheckBox cb;
     View view;
     Button saveBtn;
@@ -40,6 +41,7 @@ public class EditFragment extends Fragment {
         deleteBtn = view.findViewById(R.id.delete_btn);
         nameEt = view.findViewById(R.id.edit_name_et);
         passwordEt = view.findViewById(R.id.edit_password_et);
+        locationEt = view.findViewById(R.id.edit_location_et);
         emailEt = view.findViewById(R.id.edit_email_et);
         cb = view.findViewById(R.id.main_cb);
 
@@ -91,7 +93,9 @@ public class EditFragment extends Fragment {
                 nameEt.getText().toString(),
                 cb.isChecked(),
                 emailEt.getText().toString(),
-                passwordEt.getText().toString());
+                passwordEt.getText().toString(),
+                locationEt.getText().toString());
+
 
         Model.instance.updateTeacher(teacher, new Model.UpdateTeacherListener() {
             @Override
@@ -111,6 +115,7 @@ public class EditFragment extends Fragment {
         nameEt.setText(teacher.getName());
         emailEt.setText(teacher.getEmail());
         passwordEt.setText(teacher.getPassword());
+        locationEt.setText(teacher.getLocation());
         cb.setChecked(teacher.isFlag());
     }
 

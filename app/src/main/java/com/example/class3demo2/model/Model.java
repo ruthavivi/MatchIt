@@ -20,15 +20,11 @@ public class Model {
     public interface GetAllTeachersListener {
         void onComplete(List<Teacher> data);
     }
-    public void getAllStudents(GetAllTeachersListener listener){
-//        modelFirebase.getAllTeachers(localLastUpdate, listener);
-//        MyApplication.executorService.execute(()->{
-//            List<Teacher> data = AppLocalDB.db.teacherDao().getAll();
-//            MyApplication.mainHandler.post(()->{
-//                listener.onComplete(data);
-//            });
-//        });
+
+    public interface GetTeachersByLocationListener {
+        void onComplete(List<Teacher> data);
     }
+
 
     MutableLiveData<List<Teacher>> teachersListLd = new MutableLiveData<List<Teacher>>();
     private void reloadTeachersList() {

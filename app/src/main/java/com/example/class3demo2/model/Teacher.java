@@ -23,6 +23,7 @@ public class Teacher {
     @PrimaryKey
     @NonNull
     String id = "";
+    String location = "";
     String email = "";
     String name = "";
     String password = "";
@@ -38,16 +39,18 @@ public class Teacher {
     }
 
     public Teacher(){}
-    public Teacher(String name, String id, boolean flag,String email,String password) {
+    public Teacher(String name, String id, boolean flag,String email,String password,String location) {
         this.name = name;
         this.password=password;
         this.id = id;
         this.flag = flag;
         this.email=email;
+        this.location = location;
     }
 
-    public void updateTeacher(String name, boolean flag,String email,String password){
+    public void updateTeacher(String name, boolean flag,String email,String password,String location){
         this.name = name;
+        this.location = location;
         this.password=password;
         this.flag = flag;
         this.email=email;
@@ -55,6 +58,10 @@ public class Teacher {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setPassword(String password) {
@@ -76,6 +83,10 @@ public class Teacher {
 
     public String getName() {
         return name;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public String getPassword() {
@@ -100,6 +111,7 @@ public class Teacher {
         json.put("name", getName());
         json.put("password", getPassword());
         json.put("email", getEmail());
+        json.put("location", getLocation());
         json.put("flag", isFlag());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
         return json;
@@ -112,9 +124,10 @@ public class Teacher {
         }
         String name = (String)json.get("name");
         String password = (String)json.get("password");
+        String location = (String)json.get("location");
         String email = (String)json.get("email");
         boolean flag = (Boolean) json.get("flag");
-        Teacher teacher = new Teacher(name,id,flag,email,password);
+        Teacher teacher = new Teacher(name,id,flag,email,password,location);
         Timestamp ts = (Timestamp)json.get(LAST_UPDATED);
         teacher.setLastUpdated(new Long(ts.getSeconds()));
         return teacher;

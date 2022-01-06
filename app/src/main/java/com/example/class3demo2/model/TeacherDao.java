@@ -26,4 +26,17 @@ public interface TeacherDao {
 
     @Query("SELECT * FROM Teacher WHERE id=:id ")
     Teacher getTeacherById(String id);
+
+
+//    @Query("SELECT * FROM Teacher")
+//    Teacher getTeachersByLocation(String location);
+
+
+
+
+
+
+
+
+
 }
