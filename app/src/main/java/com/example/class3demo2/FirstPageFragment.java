@@ -22,7 +22,7 @@ public class FirstPageFragment extends Fragment {
         Button sub_teacher=view.findViewById(R.id.subTeacher);
         sub_teacher.setOnClickListener(Navigation.createNavigateOnClickListener(FirstPageFragmentDirections.actionFirstPageFragmentToLogInFragment()));
 
-        Button search_btn = view.findViewById(R.id.search_bt);
+        Button search_btn = view.findViewById(R.id.cancel_bt);
         search_btn.setOnClickListener(Navigation.createNavigateOnClickListener(FirstPageFragmentDirections.actionGlobalSearchFragment()));
 
 
