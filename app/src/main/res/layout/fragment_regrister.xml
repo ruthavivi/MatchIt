@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTeacherFragment">
-
+    tools:context=".RegristerFragment">
 
     <ImageView
         android:id="@+id/main_avatar_imv"
@@ -153,19 +152,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/main_save_btn"
+        android:id="@+id/main_register2_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="8dp"
-        android:text="SAVE"
+        android:text="REGISTER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/main_cancel_btn"
         app:layout_constraintTop_toTopOf="@+id/main_cancel_btn" />
-
-
-
 
     <Button
         android:id="@+id/main_cancel_btn"
@@ -175,7 +171,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="4dp"
         android:text="CANCEL"
-        app:layout_constraintEnd_toStartOf="@+id/main_save_btn"
+        app:layout_constraintEnd_toStartOf="@+id/main_register2_btn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_cb" />

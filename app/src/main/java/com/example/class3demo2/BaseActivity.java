@@ -22,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
 
         NavHostFragment nav_host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.base_navhost);
         navCtrl = nav_host.getNavController();
-       // NavigationUI.setupActionBarWithNavController(this,navCtrl);
+        //NavigationUI.setupActionBarWithNavController(this,navCtrl);
     }
 
     @Override

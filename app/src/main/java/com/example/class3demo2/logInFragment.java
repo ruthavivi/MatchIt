@@ -49,7 +49,10 @@ public class logInFragment extends Fragment {
         });
 
         Button register = view.findViewById(R.id.register);
-        register.setOnClickListener(Navigation.createNavigateOnClickListener(logInFragmentDirections.actionGlobalAddTeacherFragment()));
+
+        //register.setOnClickListener(Navigation.createNavigateOnClickListener(logInFragmentDirections.actionGlobalRegristerFragment()));
+        register.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_logInFragment_to_regristerFragment));
+        //machIt.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_teacherDetailsFragment_to_contactInfoFragment));
 
 
         Button cancel=view.findViewById(R.id.cancel_bt);

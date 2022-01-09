@@ -26,10 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 //import com.google.firebase.auth.FirebaseAuth;
 
-
 public class AddTeacherFragment extends Fragment {
 
-    //private FirebaseAuth mAuth;
     EditText nameEt;
     EditText passwordEt;
     EditText idEt;
@@ -38,16 +36,11 @@ public class AddTeacherFragment extends Fragment {
     CheckBox cb;
     View view;
     ProgressBar progressbar;
-    Button registerBtn;
-    TextView loginNowBtn;
+    Button saveBtn;
     Button cancelBtn;
-
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://matchitapp-4d472-default-rtdb.firebaseio.com/");
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_teacher, container, false);
 
         nameEt = view.findViewById(R.id.main_name_et);
@@ -59,31 +52,21 @@ public class AddTeacherFragment extends Fragment {
         progressbar = view.findViewById(R.id.main_progressbar);
         progressbar.setVisibility(View.GONE);
 
-
-        registerBtn = view.findViewById(R.id.main_register2_btn);
-        registerBtn.setOnClickListener(new View.OnClickListener() {
+        saveBtn = view.findViewById(R.id.main_save_btn);
+        cancelBtn = view.findViewById(R.id.main_cancel_btn);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        register();
-                }
-        });
-
-        cancelBtn = view.findViewById(R.id.main_cancel_btn);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).popBackStack();
+                save();
             }
         });
-
         return view;
+
     }
 
-
-    private void register()
-    {
+    private void save() {
         progressbar.setVisibility(View.VISIBLE);
-        registerBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
         cancelBtn.setEnabled(false);
 
         String name = nameEt.getText().toString();
@@ -92,40 +75,15 @@ public class AddTeacherFragment extends Fragment {
         String id = idEt.getText().toString();
         String email = emailEt.getText().toString();
         boolean flag = cb.isChecked();
+        Log.d("TAG","saved name:" + name + " id:" + id +" email:" + email+" password:" + password+"location"+location+  " flag:" + flag);
+        Teacher st = new Teacher(name,id,flag,email,password,location);
+        Model.instance.addTeacher(st,()->{
+            Navigation.findNavController(view).navigateUp();
+        });
+    }
+}
 
-        if (name.isEmpty() || password.isEmpty() ||location.isEmpty()||id.isEmpty()||email.isEmpty())
-        {
-            Toast.makeText(view.getContext(),"Please fill all fields", Toast.LENGTH_SHORT).show();
-        }
-        else
-            {
-                databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //check if the id is not registered before
-                        if (snapshot.hasChild(id)){
-                            Toast.makeText(view.getContext(),"ID is already registered", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            //sending data to firebase Realtime Database
-                            //we are using id as unique identity of every user
-                            databaseReference.child("users").child(id).child("name").setValue(name);
-                            databaseReference.child("users").child(id).child("email").setValue(email);
-                            databaseReference.child("users").child(id).child("password").setValue(password);
-                            databaseReference.child("users").child(id).child("location").setValue(location);
 
-                            Toast.makeText(view.getContext(),"User registered successfully.", Toast.LENGTH_SHORT).show();
-                            //finish();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-            }
 
 //        Log.d("TAG","saved name:" + name + " id:" + id +" email:" + email+" password:" + password+"location"+location+  " flag:" + flag);
 //        Teacher st = new Teacher(name,id,flag,email,password,location);
@@ -133,10 +91,9 @@ public class AddTeacherFragment extends Fragment {
 //            Navigation.findNavController(view).navigateUp();
 //        });
 
-    }
 
 
 
 
 
-}
+
