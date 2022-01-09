@@ -70,9 +70,20 @@ public class TeacherDetailsFragment extends Fragment {
             }
         });
 
+        machIt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                TeacherDetailsFragmentDirections.ActionTeacherDetailsFragmentToContactInfoFragment action2=TeacherDetailsFragmentDirections.actionTeacherDetailsFragmentToContactInfoFragment(TeacherId);
+                Navigation.findNavController(view).navigate(action2);
 
 
-        machIt.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_teacherDetailsFragment_to_contactInfoFragment));
+            }
+        });
+
+
+
+        //machIt.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_teacherDetailsFragment_to_contactInfoFragment));
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

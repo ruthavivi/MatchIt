@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_add_teacher.xml" value="0.1" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_add_teacher.xml" value="0.16" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_contact_info.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_edit.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_regrister.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_teacher_details.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/menu/base_menu.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/menu/teacher_list_menu.xml" value="0.1" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchItAppNew2/app/src/main/res/layout/fragment_add_teacher.xml" value="0.17481884057971014" />
