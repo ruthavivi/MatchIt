@@ -30,10 +30,10 @@
             app:destination="@id/editFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addTeacherFragment"
+        android:id="@+id/regristerFragment"
         android:name="com.example.class3demo2.AddTeacherFragment"
         android:label="Add Teacher"
-        tools:layout="@layout/fragment_add_teacher"/><action android:id="@+id/action_global_addTeacherFragment" app:destination="@id/addTeacherFragment"/>
+        tools:layout="@layout/fragment_add_teacher"/><action android:id="@+id/action_global_addTeacherFragment" app:destination="@id/regristerFragment"/>
     <fragment
         android:id="@+id/firstPageFragment"
         android:name="com.example.class3demo2.FirstPageFragment"

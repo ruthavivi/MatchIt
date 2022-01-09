@@ -46,8 +46,7 @@ public class RegristerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_regrister, container, false);
 
         nameEt = view.findViewById(R.id.main_name_et);
@@ -64,7 +63,9 @@ public class RegristerFragment extends Fragment {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 register();
+                save();
             }
         });
 
@@ -80,8 +81,7 @@ public class RegristerFragment extends Fragment {
     }
 
 
-    private void register()
-    {
+    private void register() {
         progressbar.setVisibility(View.VISIBLE);
         registerBtn.setEnabled(false);
         cancelBtn.setEnabled(false);
@@ -93,20 +93,16 @@ public class RegristerFragment extends Fragment {
         String email = emailEt.getText().toString();
         boolean flag = cb.isChecked();
 
-        if (name.isEmpty() || password.isEmpty() ||location.isEmpty()||id.isEmpty()||email.isEmpty())
-        {
-            Toast.makeText(view.getContext(),"Please fill all fields", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        if (name.isEmpty() || password.isEmpty() || location.isEmpty() || id.isEmpty() || email.isEmpty()) {
+            Toast.makeText(view.getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+        } else {
             databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     //check if the id is not registered before
-                    if (snapshot.hasChild(id)){
-                        Toast.makeText(view.getContext(),"ID is already registered", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
+                    if (snapshot.hasChild(id)) {
+                        Toast.makeText(view.getContext(), "ID is already registered", Toast.LENGTH_SHORT).show();
+                    } else {
                         //sending data to firebase Realtime Database
                         //we are using id as unique identity of every user
                         databaseReference.child("users").child(id).child("name").setValue(name);
@@ -114,7 +110,7 @@ public class RegristerFragment extends Fragment {
                         databaseReference.child("users").child(id).child("password").setValue(password);
                         databaseReference.child("users").child(id).child("location").setValue(location);
 
-                        Toast.makeText(view.getContext(),"User registered successfully.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), "User registered successfully.", Toast.LENGTH_SHORT).show();
                         //finish();
                     }
                 }
@@ -136,4 +132,21 @@ public class RegristerFragment extends Fragment {
     }
 
 
+    private void save() {
+        progressbar.setVisibility(View.VISIBLE);
+        registerBtn.setEnabled(false);
+        cancelBtn.setEnabled(false);
+
+        String name = nameEt.getText().toString();
+        String password = passwordEt.getText().toString();
+        String location = locationEt.getText().toString();
+        String id = idEt.getText().toString();
+        String email = emailEt.getText().toString();
+        boolean flag = cb.isChecked();
+        Log.d("TAG", "saved name:" + name + " id:" + id + " email:" + email + " password:" + password + "location" + location + " flag:" + flag);
+        Teacher st = new Teacher(name, id, flag, email, password, location);
+        Model.instance.addTeacher(st, () -> {
+            Navigation.findNavController(view).navigateUp();
+        });
+    }
 }
