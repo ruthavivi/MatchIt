@@ -1,11 +1,17 @@
 package com.example.class3demo2;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RegristerFragment extends Fragment {
 
+    private static final int REQUEST_IMAGE_CAPTURE =1 ;
     //private FirebaseAuth mAuth;
     EditText nameEt;
     EditText passwordEt;
@@ -41,6 +50,8 @@ public class RegristerFragment extends Fragment {
     Button registerBtn;
     TextView loginNowBtn;
     Button cancelBtn;
+    ImageView avatar;
+    Bitmap bitmap;
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://matchitapp-4d472-default-rtdb.firebaseio.com/");
 
@@ -48,6 +59,7 @@ public class RegristerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_regrister, container, false);
+        avatar = view.findViewById(R.id.main_avatar_imv);
 
         nameEt = view.findViewById(R.id.main_name_et);
         passwordEt = view.findViewById(R.id.main_password_et);
@@ -77,7 +89,24 @@ public class RegristerFragment extends Fragment {
             }
         });
 
+        ImageButton cameraBtn = view.findViewById(R.id.main_camera_btn);
+        cameraBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
+        });
+
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle bundle = data.getExtras();
+            bitmap = (Bitmap) bundle.get("data");
+            avatar.setImageBitmap(bitmap);
+        }
     }
 
 
@@ -145,8 +174,20 @@ public class RegristerFragment extends Fragment {
         boolean flag = cb.isChecked();
         Log.d("TAG", "saved name:" + name + " id:" + id + " email:" + email + " password:" + password + "location" + location + " flag:" + flag);
         Teacher st = new Teacher(name, id, flag, email, password, location);
-        Model.instance.addTeacher(st, () -> {
-            Navigation.findNavController(view).navigateUp();
-        });
+        if (bitmap == null) {
+            Model.instance.addTeacher(st, () -> {
+                Navigation.findNavController(view).navigateUp();
+            });
+        } else {
+            Model.instance.saveImage(bitmap, id, url -> {
+                st.setAvatarUtl(url);
+                Model.instance.addTeacher(st, () -> {
+                    Navigation.findNavController(view).navigateUp();
+                });
+            });
+        }
+//        Model.instance.addTeacher(st, () -> {
+//            Navigation.findNavController(view).navigateUp();
+//        });
     }
 }

@@ -4,13 +4,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.class3demo2.R;
+import com.example.class3demo2.TeachersListFragment;
+import com.example.class3demo2.TeachersListFragmentViewModel;
 import com.example.class3demo2.model.Teacher;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +48,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         Teacher teacher = list.get(position);
         holder.nameTv.setText(teacher.getName());
         holder.idTv.setText(teacher.getId());
         holder.cb.setChecked(teacher.isFlag());
+        String url = teacher.getAvatarUtl();
+        if (url != null && !url.equals("")){
+
+            Picasso.get()
+                    .load(url)
+                    .placeholder(R.drawable.avatar)
+                    .into(holder.avatarImg);
+        }
     }
 
     @Override
@@ -57,6 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nameTv;
+        ImageView avatarImg;
 
         TextView idTv;
         CheckBox cb;
@@ -64,6 +78,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             nameTv = itemView.findViewById(R.id.listrow_name_tv);
+            avatarImg = itemView.findViewById(R.id.listrow_avatar_img);
 
             idTv = itemView.findViewById(R.id.listrow_id_tv);
             cb = itemView.findViewById(R.id.listrow_cb);
@@ -77,5 +92,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
                 }
             });
         }
+
+
+
+        public void bind(Teacher teacher){
+            nameTv.setText(teacher.getName());
+            idTv.setText(teacher.getId());
+            cb.setChecked(teacher.isFlag());
+            String url = teacher.getAvatarUtl();
+            if (url != null && !url.equals("")){
+                Picasso.get()
+                        .load(url)
+                        .placeholder(R.drawable.avatar)
+                        .into(avatarImg);
+            }
+        }
     }
+
+
 }

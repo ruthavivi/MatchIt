@@ -29,6 +29,7 @@ public class Teacher {
     String password = "";
     boolean flag = false;
     Long lastUpdated = new Long(0);
+    String avatarUtl = "";
 
     public void setLastUpdated(Long lastUpdated) {
         this.lastUpdated = lastUpdated;
@@ -105,6 +106,14 @@ public class Teacher {
         return flag;
     }
 
+    public String getAvatarUtl() {
+        return avatarUtl;
+    }
+
+    public void setAvatarUtl(String avatarUtl) {
+        this.avatarUtl = avatarUtl;
+    }
+
     public Map<String,Object> toJson(){
         Map<String, Object> json = new HashMap<>();
         json.put(ID, getId());
@@ -114,6 +123,7 @@ public class Teacher {
         json.put("location", getLocation());
         json.put("flag", isFlag());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
+        json.put("avatarUrl",avatarUtl);
         return json;
     }
 
@@ -127,9 +137,12 @@ public class Teacher {
         String location = (String)json.get("location");
         String email = (String)json.get("email");
         boolean flag = (Boolean) json.get("flag");
+
+        String avatarUrl = (String)json.get("avatarUrl");
         Teacher teacher = new Teacher(name,id,flag,email,password,location);
         Timestamp ts = (Timestamp)json.get(LAST_UPDATED);
         teacher.setLastUpdated(new Long(ts.getSeconds()));
+        teacher.setAvatarUtl(avatarUrl);
         return teacher;
     }
 
@@ -146,4 +159,6 @@ public class Teacher {
         editor.commit();
         Log.d("TAG", "new lud " + date);
     }
+
+
 }

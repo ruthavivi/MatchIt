@@ -1,5 +1,6 @@
 package com.example.class3demo2.model;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -123,5 +124,15 @@ public class Model {
                 listener.onError(e);
             }
         });
+
+
+    }
+
+
+    public interface SaveImageListener{
+        void onComplete(String url);
+    }
+    public void saveImage(Bitmap bitmap, String name, SaveImageListener listener) {
+        modelFirebase.saveImage(bitmap,name,listener);
     }
 }

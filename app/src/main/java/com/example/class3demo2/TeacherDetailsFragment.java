@@ -11,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.class3demo2.model.Model;
 import com.example.class3demo2.model.Teacher;
+import com.squareup.picasso.Picasso;
+
 
 public class TeacherDetailsFragment extends Fragment {
     Teacher teacher;
@@ -27,6 +30,8 @@ public class TeacherDetailsFragment extends Fragment {
     Button machIt;
     Button cancel;
     Button edit;
+    ImageView avatarImg;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +50,7 @@ public class TeacherDetailsFragment extends Fragment {
         machIt=view.findViewById(R.id.matchIt_btn);
         cancel=view.findViewById(R.id.cancel_btn);
         edit = view.findViewById(R.id.edit_btn);
+        avatarImg = view.findViewById(R.id.teacherdetails_avatar_img);
 
 
         String TeacherId = TeacherDetailsFragmentArgs.fromBundle(getArguments()).getTeacherId();
@@ -101,6 +107,12 @@ public class TeacherDetailsFragment extends Fragment {
         emailTv.setText(teacher.getEmail());
         passwordTv.setText(teacher.getPassword());
         idTv.setText(teacher.getId());
+        if (teacher.getAvatarUtl() != null) {
+            Picasso.get()
+                    .load(teacher.getAvatarUtl())
+                    .placeholder(R.drawable.avatar)
+                    .into(avatarImg);
+        }
         progressBar.setVisibility(View.GONE);
     }
 }
