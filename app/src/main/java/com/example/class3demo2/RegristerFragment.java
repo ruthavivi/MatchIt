@@ -27,17 +27,23 @@ import android.widget.Toast;
 
 import com.example.class3demo2.model.Model;
 import com.example.class3demo2.model.Teacher;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.auth.FirebaseAuth;
 
 
 public class RegristerFragment extends Fragment {
 
-    private static final int REQUEST_IMAGE_CAPTURE =1 ;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     //private FirebaseAuth mAuth;
     EditText nameEt;
     EditText passwordEt;
@@ -53,7 +59,6 @@ public class RegristerFragment extends Fragment {
     ImageView avatar;
     Bitmap bitmap;
 
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://matchitapp-4d472-default-rtdb.firebaseio.com/");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,7 +98,7 @@ public class RegristerFragment extends Fragment {
         cameraBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
         });
 
         return view;
@@ -102,7 +107,7 @@ public class RegristerFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle bundle = data.getExtras();
             bitmap = (Bitmap) bundle.get("data");
             avatar.setImageBitmap(bitmap);
@@ -122,41 +127,65 @@ public class RegristerFragment extends Fragment {
         String email = emailEt.getText().toString();
         boolean flag = cb.isChecked();
 
-        if (name.isEmpty() || password.isEmpty() || location.isEmpty() || id.isEmpty() || email.isEmpty()) {
-            Toast.makeText(view.getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-        } else {
-            databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    //check if the id is not registered before
-                    if (snapshot.hasChild(id)) {
-                        Toast.makeText(view.getContext(), "ID is already registered", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //sending data to firebase Realtime Database
-                        //we are using id as unique identity of every user
-                        databaseReference.child("users").child(id).child("name").setValue(name);
-                        databaseReference.child("users").child(id).child("email").setValue(email);
-                        databaseReference.child("users").child(id).child("password").setValue(password);
-                        databaseReference.child("users").child(id).child("location").setValue(location);
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("RegisterFragment", "signInWithEmail:success");
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                        Toast.makeText(view.getContext(), "User registered successfully.", Toast.LENGTH_SHORT).show();
-                        //finish();
+                    insertUser(user.getUid(), user.getEmail(), name,location,flag);
+                } else {
+                    progressbar.setVisibility(View.GONE);
+                    // If sign in fails, display a message to the user.
+                    Log.w("RegisterFragment", "signInWithEmail:failure", task.getException());
+                    if(getContext()!= null){
+                    Toast.makeText(getContext(), "Authentication failed."+task.getException().getMessage(),
+                            Toast.LENGTH_SHORT).show();
                     }
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
-                }
-            });
-
-        }
 
 //        Log.d("TAG","saved name:" + name + " id:" + id +" email:" + email+" password:" + password+"location"+location+  " flag:" + flag);
 //        Teacher st = new Teacher(name,id,flag,email,password,location);
 //        Model.instance.addTeacher(st,()->{
 //            Navigation.findNavController(view).navigateUp();
 //        });
+
+    }
+
+    private void insertUser(String userUid, String email, String name, String location, boolean cb) {
+        Teacher teacher = new Teacher(name, userUid, cb, email, "", location);
+        FirebaseFirestore.getInstance().collection("teachers").document(userUid).set(teacher.toJson())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        progressbar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("RegisterFragment", "insertUser: success");
+                            if(getContext()!= null){
+                                Toast.makeText(getContext(), "insertUser success.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("RegisterFragment", "insertUser:failure", task.getException());
+                            if(getContext()!= null){
+                            Toast.makeText(getContext(), "insertUser failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                });
 
     }
 

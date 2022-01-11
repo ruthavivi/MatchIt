@@ -3,12 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_add_teacher.xml" value="0.16" />
-        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_contact_info.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_add_teacher.xml" value="0.1" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_edit.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_first_page.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_regrister.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/layout/fragment_teacher_details.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/menu/base_menu.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchIt5/app/src/main/res/menu/teacher_list_menu.xml" value="0.1" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchItAppNew2/app/src/main/res/layout/fragment_add_teacher.xml" value="0.17481884057971014" />
@@ -22,9 +19,6 @@
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchItAppNewww/app/src/main/res/layout/fragment_teacher_details.xml" value="0.12760416666666666" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchItAppNewww/app/src/main/res/layout/fragment_teachers_list.xml" value="0.12760416666666666" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchItAppNewww/app/src/main/res/layout/teacher_list_row.xml" value="0.12760416666666666" />
-        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchItNEWW/app/src/main/res/layout/fragment_regrister.xml" value="0.1" />
-        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchItNEWW/app/src/main/res/layout/fragment_teacher_details.xml" value="0.1" />
-        <entry key="..\:/Users/lagam/AndroidStudioProjects/MatchItNEWW/app/src/main/res/layout/teacher_list_row.xml" value="0.1" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/activity_base.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_add_teacher.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_contact_info.xml" value="0.264" />
@@ -36,9 +30,13 @@
         <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/fragment_teachers_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/layout/teacher_list_row.xml" value="0.264" />
         <entry key="..\:/Users/lagam/AndroidStudioProjects/class 10 newdemo/app/src/main/res/menu/base_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/nikat/AndroidStudioProjects/MatchIt/app/src/main/res/layout/activity_splesh.xml" value="0.33645833333333336" />
         <entry key="..\:/Users/nikat/AndroidStudioProjects/MatchIt/app/src/main/res/layout/fragment_add_teacher.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/nikat/AndroidStudioProjects/MatchIt/app/src/main/res/layout/fragment_first_page.xml" value="0.23020833333333332" />
         <entry key="..\:/Users/nikat/AndroidStudioProjects/MatchIt/app/src/main/res/layout/fragment_log_in.xml" value="0.22" />
         <entry key="..\:/Users/nikat/AndroidStudioProjects/MatchIt/app/src/main/res/layout/fragment_search.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/nikat/AndroidStudioProjects/MatchIt/app/src/main/res/layout/fragment_splash.xml" value="0.31927083333333334" />
+        <entry key="..\:/Users/nikat/AndroidStudioProjects/MatchIt/app/src/main/res/layout/fragment_splesh.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_student_list.xml" value="0.1" />

@@ -88,4 +88,15 @@
         android:label="fragment_regrister"
         tools:layout="@layout/fragment_regrister" />
     <action android:id="@+id/action_global_regristerFragment" app:destination="@id/regristerFragment" />
+    <fragment
+        android:id="@+id/spleshFragment2"
+        android:name="com.example.class3demo2.SpleshFragment"
+        android:label="SpleshFragment" >
+        <action
+            android:id="@+id/action_spleshFragment2_to_teachersListFragment"
+            app:destination="@id/teachersListFragment" />
+        <action
+            android:id="@+id/action_spleshFragment2_to_regristerFragment"
+            app:destination="@id/regristerFragment" />
+    </fragment>
 </navigation>
