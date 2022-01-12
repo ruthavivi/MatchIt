@@ -131,15 +131,15 @@ public class RegristerFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("RegisterFragment", "signInWithEmail:success");
+                    // registration success, update UI with the signed-in user's information
+                    Log.d("RegisterFragment", "createUserWithEmail:success");
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     insertUser(user.getUid(), user.getEmail(), name,location,flag);
                 } else {
                     progressbar.setVisibility(View.GONE);
-                    // If sign in fails, display a message to the user.
-                    Log.w("RegisterFragment", "signInWithEmail:failure", task.getException());
+                    // If registration fails, display a message to the user.
+                    Log.w("RegisterFragment", "createUserWithEmail:failure", task.getException());
                     if(getContext()!= null){
                     Toast.makeText(getContext(), "Authentication failed."+task.getException().getMessage(),
                             Toast.LENGTH_SHORT).show();
