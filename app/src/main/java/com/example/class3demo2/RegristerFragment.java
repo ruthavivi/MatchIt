@@ -82,7 +82,7 @@ public class RegristerFragment extends Fragment {
             public void onClick(View v) {
 
                 register();
-                save();
+                //save();
             }
         });
 
@@ -161,6 +161,18 @@ public class RegristerFragment extends Fragment {
 
     private void insertUser(String userUid, String email, String name, String location, boolean cb,String password) {
         Teacher teacher = new Teacher(name, userUid, cb, email, password, location);
+        if (bitmap == null) {
+            Model.instance.addTeacher(teacher, () -> {
+                Navigation.findNavController(view).navigateUp();
+            });
+        } else {
+            Model.instance.saveImage(bitmap, userUid, url -> {
+                teacher.setAvatarUtl(url);
+                Model.instance.addTeacher(teacher, () -> {
+                    Navigation.findNavController(view).navigateUp();
+                });
+            });
+        }
         FirebaseFirestore.getInstance().collection("teachers").document(userUid).set(teacher.toJson())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
