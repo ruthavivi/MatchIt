@@ -16,6 +16,7 @@ public class SplashFragment extends Fragment {
 
 //מפה המהסך אמור להמשיך אם הוא מחובר לדף הבית ובמידה ולא אז ממשיך להרשמה בעצם בודק עם המשתמש מחובר כבר או לא
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
