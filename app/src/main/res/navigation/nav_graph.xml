@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_teacherDetailsFragment_to_editFragment"
             app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_teacherDetailsFragment_pop"
+            app:popUpTo="@id/logInFragment" />
     </fragment>
     <fragment
         android:id="@+id/regristerFragment"
@@ -51,6 +54,9 @@
         <action
             android:id="@+id/action_logInFragment_to_regristerFragment"
             app:destination="@id/regristerFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
@@ -62,8 +68,7 @@
             app:argType="string" />
         <action
             android:id="@+id/action_editFragment_pop"
-            app:popUpTo="@id/teachersListFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/logInFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactInfoFragment"
@@ -99,4 +104,5 @@
             android:id="@+id/action_spleshFragment2_to_regristerFragment"
             app:destination="@id/regristerFragment" />
     </fragment>
+    <action android:id="@+id/action_global_logInFragment" app:destination="@id/logInFragment" />
 </navigation>

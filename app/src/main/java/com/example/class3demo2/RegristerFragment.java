@@ -135,7 +135,8 @@ public class RegristerFragment extends Fragment {
                     Log.d("RegisterFragment", "createUserWithEmail:success");
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    insertUser(user.getUid(), user.getEmail(), name,location,flag);
+
+                    insertUser(user.getUid(), user.getEmail(), name,location,flag,password);
                 } else {
                     progressbar.setVisibility(View.GONE);
                     // If registration fails, display a message to the user.
@@ -158,8 +159,8 @@ public class RegristerFragment extends Fragment {
 
     }
 
-    private void insertUser(String userUid, String email, String name, String location, boolean cb) {
-        Teacher teacher = new Teacher(name, userUid, cb, email, "", location);
+    private void insertUser(String userUid, String email, String name, String location, boolean cb,String password) {
+        Teacher teacher = new Teacher(name, userUid, cb, email, password, location);
         FirebaseFirestore.getInstance().collection("teachers").document(userUid).set(teacher.toJson())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

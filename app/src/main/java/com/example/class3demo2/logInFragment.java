@@ -48,7 +48,7 @@ public class logInFragment extends Fragment {
         logInBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                login(view);
             }
         });
 
@@ -66,7 +66,7 @@ public class logInFragment extends Fragment {
         return view;
     }
 
-    private void login()
+    private void login(View view)
     {
         //progressbar.setVisibility(View.VISIBLE);
         logInBTN.setEnabled(false);
@@ -84,6 +84,9 @@ public class logInFragment extends Fragment {
                             if(getContext()!= null){
                                 Toast.makeText(getContext(), "signIn User success.",
                                         Toast.LENGTH_SHORT).show();
+
+                                logInFragmentDirections.ActionLogInFragmentToEditFragment action = logInFragmentDirections.actionLogInFragmentToEditFragment(currentUser.getUid());
+                                Navigation.findNavController(view).navigate(action);
                             }
 
                         }else {
