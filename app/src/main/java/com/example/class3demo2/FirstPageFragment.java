@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class FirstPageFragment extends Fragment {
@@ -23,8 +27,14 @@ public class FirstPageFragment extends Fragment {
         sub_teacher.setOnClickListener(Navigation.createNavigateOnClickListener(FirstPageFragmentDirections.actionFirstPageFragmentToLogInFragment()));
 
         Button teacherList_btn = view.findViewById(R.id.teacherList_bt);
-        teacherList_btn.setOnClickListener(Navigation.createNavigateOnClickListener(FirstPageFragmentDirections.actionGlobalTeachersListFragment()));
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+            teacherList_btn.setOnClickListener(Navigation.createNavigateOnClickListener(FirstPageFragmentDirections.actionGlobalTeachersListFragment()));
+        }else{
+            Toast.makeText(getContext(), "You need to login in order to see the list.",
+                    Toast.LENGTH_SHORT).show();
+        }
 
 
 

@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.class3demo2.model.Model;
 import com.example.class3demo2.model.Teacher;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class EditFragment extends Fragment {
@@ -28,6 +30,7 @@ public class EditFragment extends Fragment {
     Button saveBtn;
     Button cancelBtn;
     Button deleteBtn;
+    Button logoutBtn;
     Teacher teacher;
 
 
@@ -39,11 +42,13 @@ public class EditFragment extends Fragment {
         saveBtn = view.findViewById(R.id.save_btn);
         cancelBtn = view.findViewById(R.id.cancel_btn);
         deleteBtn = view.findViewById(R.id.delete_btn);
+        logoutBtn = view.findViewById(R.id.logout_editF);
         nameEt = view.findViewById(R.id.edit_name_et);
         passwordEt = view.findViewById(R.id.edit_password_et);
         locationEt = view.findViewById(R.id.edit_location_et);
         emailEt = view.findViewById(R.id.edit_email_et);
         cb = view.findViewById(R.id.main_cb);
+
 
         String teacherId = EditFragmentArgs.fromBundle(getArguments()).getTeacherId();
         Model.instance.getTeacherById(teacherId, (teacher) -> {
@@ -78,6 +83,13 @@ public class EditFragment extends Fragment {
 
                 });
 
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
             }
         });
 

@@ -250,6 +250,18 @@
         app:layout_constraintStart_toEndOf="@+id/save_btn"
         app:layout_constraintTop_toTopOf="@+id/save_btn" />
 
+    <Button
+        android:id="@+id/logout_editF"
+        android:layout_width="124dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="80dp"
+        android:text="LogOut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/save_btn"
+        app:layout_constraintVertical_bias="0.152" />
 
 
 <!--    <ProgressBar-->
