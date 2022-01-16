@@ -3,6 +3,7 @@ package com.example.class3demo2;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -31,6 +32,20 @@ public class BaseActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.base_menu,menu);
+//        MenuItem menuItem=menu.findItem(R.id.search_view);
+//        SearchView searchView=(SearchView) menuItem.getActionView();
+//        searchView.setMaxWidth(Integer.MAX_VALUE);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return true;
+//            }
+//        });
         return true;
     }
 
@@ -53,6 +68,8 @@ public class BaseActivity extends AppCompatActivity {
                     });
                     dialog.show(getSupportFragmentManager(), "TAG");
                     return true;
+
+
                 default:
                     return NavigationUI.onNavDestinationSelected(item, navCtrl);
             }

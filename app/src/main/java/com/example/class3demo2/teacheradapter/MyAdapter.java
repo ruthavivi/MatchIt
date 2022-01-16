@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,11 +20,47 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements Filterable {
 
     private List<Teacher> list = new ArrayList<>();
+    private List<Teacher> listFilter;
+
+    @Override
+    public Filter getFilter() {
+        Filter filter=new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                FilterResults filterResults=new FilterResults();
+                if(charSequence==null|charSequence.length()==0){
+                    filterResults.count=listFilter.size();
+                    filterResults.values=listFilter;
+                }else{
+                    String searchCh=charSequence.toString().toLowerCase();
+                    List<Teacher>resultData=new ArrayList<>();
+                    for (Teacher teacher:listFilter){
+                        if(teacher.getName().toLowerCase().contains(searchCh)){
+                            resultData.add(teacher);
+                        }
+                    }
+                    filterResults.count=resultData.size();
+                    filterResults.values=resultData;
+
+                }
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                list= (List<Teacher>) filterResults.values;
+                notifyDataSetChanged();
+
+            }
+        };
+        return filter;
+    }
 
     public interface OnItemClickListener{
         void onItemClick(int position, View v);
@@ -35,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
     public void updateListTeachers(List<Teacher> list){
         this.list = list;
+        this.listFilter=list;
         notifyDataSetChanged();
     }
 

@@ -4,9 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -15,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.class3demo2.model.Teacher;
@@ -26,6 +30,7 @@ public class TeachersListFragment extends Fragment {
     View view;
     MyAdapter adapter;
     SwipeRefreshLayout swipeRefresh;
+    NavController navCtrl;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -96,6 +101,44 @@ public class TeachersListFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.teacher_list_menu,menu);
+        MenuItem menuItem=menu.findItem(R.id.search_view);
+        SearchView searchView=(SearchView) menuItem.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (!super.onOptionsItemSelected(item)) {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    navCtrl.navigateUp();
+                    return true;
+
+                case R.id.search_view:
+
+
+
+                    return true;
+
+
+                default:
+                    return NavigationUI.onNavDestinationSelected(item, navCtrl);
+            }
+        }
+        return true;
     }
 
 }
