@@ -128,6 +128,10 @@ public class EditFragment extends Fragment {
                 passwordEt.getText().toString(),
                 locationEt.getText().toString());
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
 
         Model.instance.updateTeacher(teacher, new Model.UpdateTeacherListener() {
             @Override
@@ -140,6 +144,25 @@ public class EditFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to update teacher: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        user.updateEmail(teacher.getEmail())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User email address updated.");
+                        }
+                    }
+                });
+        user.updatePassword(teacher.getPassword())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User password updated.");
+                        }
+                    }
+                });
 
     }
 
