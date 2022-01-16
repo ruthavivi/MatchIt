@@ -31,19 +31,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_avatar_imv">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:hint="name">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_name_et"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_margin="4dp"
+            android:hint="name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:maxLines="1" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
@@ -101,6 +102,14 @@
 
 
 
+    <Button
+        android:id="@+id/logout_editF"
+        android:layout_width="115dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="24dp"
+        android:text="LogOut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
 
 
 <!--    <TextView-->
@@ -214,57 +223,28 @@
 <!--        app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
 
     <Button
-        android:id="@+id/cancel_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:id="@+id/save_btn"
+        android:layout_width="113dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="134dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="4dp"
-        android:text="CANCEL"
-        app:layout_constraintEnd_toStartOf="@+id/save_btn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="164dp"
+        android:text="SAVE"
+        app:layout_constraintEnd_toEndOf="@+id/delete_btn"
+        app:layout_constraintStart_toStartOf="@+id/logout_editF"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
 
     <Button
-        android:id="@+id/save_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="SAVE"
-        app:layout_constraintEnd_toEndOf="@+id/delete_btn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cancel_btn"
-        app:layout_constraintTop_toTopOf="@+id/cancel_btn" />
-
-    <Button
         android:id="@+id/delete_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="144dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
         android:text="DELETE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/save_btn"
-        app:layout_constraintTop_toTopOf="@+id/save_btn" />
-
-    <Button
-        android:id="@+id/logout_editF"
-        android:layout_width="124dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="80dp"
-        android:text="LogOut"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/save_btn"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
 
 
-<!--    <ProgressBar-->
+    <!--    <ProgressBar-->
 <!--        android:id="@+id/main_progressbar"-->
 <!--        style="?android:attr/progressBarStyle"-->
 <!--        android:layout_width="142dp"-->

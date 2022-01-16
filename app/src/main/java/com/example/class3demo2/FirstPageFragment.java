@@ -27,17 +27,7 @@ public class FirstPageFragment extends Fragment {
         sub_teacher.setOnClickListener(Navigation.createNavigateOnClickListener(FirstPageFragmentDirections.actionFirstPageFragmentToLogInFragment()));
 
         Button teacherList_btn = view.findViewById(R.id.teacherList_bt);
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null){
-            teacherList_btn.setOnClickListener(Navigation.createNavigateOnClickListener(FirstPageFragmentDirections.actionGlobalTeachersListFragment()));
-        }else{
-            Toast.makeText(getContext(), "You need to login in order to see the list.",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-
-
+        teacherList_btn.setOnClickListener(Navigation.createNavigateOnClickListener(FirstPageFragmentDirections.actionGlobalTeachersListFragment()));
 
         return view;
     }

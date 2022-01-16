@@ -57,13 +57,13 @@ public class EditFragment extends Fragment {
         });
 
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
-            }
-        });
+//        cancelBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
+//            }
+//        });
 
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,10 +86,13 @@ public class EditFragment extends Fragment {
             }
         });
 
+
+
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
+                Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
             }
         });
 
