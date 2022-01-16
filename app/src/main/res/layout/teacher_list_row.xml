@@ -18,7 +18,7 @@
         >
 
         <TextView
-            android:id="@+id/listrow_id_tv"
+            android:id="@+id/listrow_location_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -29,6 +29,19 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/listrow_avatar_img"
             app:layout_constraintTop_toBottomOf="@+id/listrow_name_tv" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/listrow_id_tv"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:text="TextView"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/listrow_cb"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/listrow_avatar_img"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/listrow_location_tv" />-->
 
         <ImageView
             android:id="@+id/listrow_avatar_img"
@@ -62,11 +75,13 @@
             android:layout_marginStart="8dp"
             android:text="TextView"
             android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/listrow_id_tv"
+            app:layout_constraintBottom_toTopOf="@+id/listrow_location_tv"
             app:layout_constraintEnd_toStartOf="@+id/listrow_cb"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/listrow_avatar_img"
             app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

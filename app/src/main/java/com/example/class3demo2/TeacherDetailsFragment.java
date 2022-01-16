@@ -24,7 +24,7 @@ public class TeacherDetailsFragment extends Fragment {
     Teacher teacher;
     TextView nameTv;
     TextView emailTv;
-    TextView passwordTv;
+    TextView locationTv;
     TextView idTv;
     ProgressBar progressBar;
     Button machIt;
@@ -42,7 +42,7 @@ public class TeacherDetailsFragment extends Fragment {
 
 
         nameTv = view.findViewById(R.id.studentdetails_name_tv);
-        passwordTv = view.findViewById(R.id.studentdetails_password_tv);
+        locationTv = view.findViewById(R.id.studentdetails_location_tv);
         emailTv = view.findViewById(R.id.studentdetails_email_tv);
         idTv = view.findViewById(R.id.studentdetails_id_tv);
         progressBar = view.findViewById(R.id.studentdetails_progressbar);
@@ -107,7 +107,7 @@ public class TeacherDetailsFragment extends Fragment {
         this.teacher = teacher;
         nameTv.setText(teacher.getName());
         emailTv.setText(teacher.getEmail());
-        passwordTv.setText(teacher.getPassword());
+        locationTv.setText(teacher.getLocation());
         idTv.setText(teacher.getId());
         if (teacher.getAvatarUtl() != null) {
             Picasso.get()

@@ -41,7 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                     String searchCh=charSequence.toString().toLowerCase();
                     List<Teacher>resultData=new ArrayList<>();
                     for (Teacher teacher:listFilter){
-                        if(teacher.getName().toLowerCase().contains(searchCh)){
+                        if(teacher.getLocation().toLowerCase().contains(searchCh)){
                             resultData.add(teacher);
                         }
                     }
@@ -90,7 +90,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
         Teacher teacher = list.get(position);
         holder.nameTv.setText(teacher.getName());
-        holder.idTv.setText(teacher.getId());
+        holder.locationTv.setText(teacher.getLocation());
+        //holder.idTv.setText(teacher.getId());
         holder.cb.setChecked(teacher.isFlag());
         String url = teacher.getAvatarUtl();
         if (url != null && !url.equals("")){
@@ -110,6 +111,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView nameTv;
         ImageView avatarImg;
+        TextView locationTv;
 
         TextView idTv;
         CheckBox cb;
@@ -118,8 +120,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             super(itemView);
             nameTv = itemView.findViewById(R.id.listrow_name_tv);
             avatarImg = itemView.findViewById(R.id.listrow_avatar_img);
+            locationTv = itemView.findViewById(R.id.listrow_location_tv);
 
-            idTv = itemView.findViewById(R.id.listrow_id_tv);
+            //idTv = itemView.findViewById(R.id.listrow_id_tv);
             cb = itemView.findViewById(R.id.listrow_cb);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -136,7 +139,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
         public void bind(Teacher teacher){
             nameTv.setText(teacher.getName());
-            idTv.setText(teacher.getId());
+            //idTv.setText(teacher.getId());
+            locationTv.setText(teacher.getLocation());
             cb.setChecked(teacher.isFlag());
             String url = teacher.getAvatarUtl();
             if (url != null && !url.equals("")){
