@@ -1,10 +1,14 @@
 package com.example.class3demo2;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.class3demo2.model.Model;
 import com.example.class3demo2.model.Teacher;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -79,6 +85,17 @@ public class EditFragment extends Fragment {
             public void onClick(View view) {
                 Model.instance.deleteTeacher(teacher, () -> {
                     //Navigation.findNavController(view).navigateUp();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    user.delete()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "User account deleted.");
+                                    }
+                                }
+                            });
                     Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
 
                 });
