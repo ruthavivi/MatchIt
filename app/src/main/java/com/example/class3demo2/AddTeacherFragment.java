@@ -33,7 +33,6 @@ public class AddTeacherFragment extends Fragment {
     EditText idEt;
     EditText emailEt;
     EditText locationEt;
-    CheckBox cb;
     View view;
     ProgressBar progressbar;
     Button saveBtn;
@@ -48,7 +47,6 @@ public class AddTeacherFragment extends Fragment {
         idEt = view.findViewById(R.id.main_id_et);
         emailEt = view.findViewById(R.id.main_email_et);
         locationEt = view.findViewById(R.id.main_location_et);
-        cb = view.findViewById(R.id.main_cb);
         progressbar = view.findViewById(R.id.main_progressbar);
         progressbar.setVisibility(View.GONE);
 
@@ -74,9 +72,8 @@ public class AddTeacherFragment extends Fragment {
         String location = locationEt.getText().toString();
         String id = idEt.getText().toString();
         String email = emailEt.getText().toString();
-        boolean flag = cb.isChecked();
-        Log.d("TAG","saved name:" + name + " id:" + id +" email:" + email+" password:" + password+"location"+location+  " flag:" + flag);
-        Teacher st = new Teacher(name,id,flag,email,password,location);
+        Log.d("TAG","saved name:" + name + " id:" + id +" email:" + email+" password:" + password+"location"+location);
+        Teacher st = new Teacher(name,id,email,password,location);
         Model.instance.addTeacher(st,()->{
             Navigation.findNavController(view).navigateUp();
         });

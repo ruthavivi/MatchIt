@@ -7,7 +7,7 @@
     tools:context=".EditFragment">
 
     <ImageView
-        android:id="@+id/main_avatar_imv"
+        android:id="@+id/teacherEdit_avatar_img"
         android:layout_width="308dp"
         android:layout_height="92dp"
         android:layout_marginStart="8dp"
@@ -29,7 +29,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_avatar_imv">
+        app:layout_constraintTop_toBottomOf="@+id/teacherEdit_avatar_img">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -89,14 +89,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <CheckBox
-            android:id="@+id/main_cb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="CB"
-            android:textSize="24sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

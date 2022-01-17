@@ -32,11 +32,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.auth.FirebaseAuth;
 
@@ -50,7 +45,6 @@ public class RegristerFragment extends Fragment {
     EditText idEt;
     EditText emailEt;
     EditText locationEt;
-    CheckBox cb;
     View view;
     ProgressBar progressbar;
     Button registerBtn;
@@ -64,14 +58,13 @@ public class RegristerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_regrister, container, false);
-        avatar = view.findViewById(R.id.main_avatar_imv);
+        avatar = view.findViewById(R.id.teacherEdit_avatar_img);
 
         nameEt = view.findViewById(R.id.main_name_et);
         passwordEt = view.findViewById(R.id.main_password_et);
         idEt = view.findViewById(R.id.main_id_et);
         emailEt = view.findViewById(R.id.main_email_et);
         locationEt = view.findViewById(R.id.main_location_et);
-        cb = view.findViewById(R.id.main_cb);
         progressbar = view.findViewById(R.id.main_progressbar);
         progressbar.setVisibility(View.GONE);
 
@@ -125,7 +118,6 @@ public class RegristerFragment extends Fragment {
         String location = locationEt.getText().toString();
         String id = idEt.getText().toString();
         String email = emailEt.getText().toString();
-        boolean flag = cb.isChecked();
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -136,7 +128,7 @@ public class RegristerFragment extends Fragment {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-                    insertUser(user.getUid(), user.getEmail(), name,location,flag,password);
+                    insertUser(user.getUid(), user.getEmail(), name,location,password);
                 } else {
                     progressbar.setVisibility(View.GONE);
                     // If registration fails, display a message to the user.
@@ -159,8 +151,8 @@ public class RegristerFragment extends Fragment {
 
     }
 
-    private void insertUser(String userUid, String email, String name, String location, boolean cb,String password) {
-        Teacher teacher = new Teacher(name, userUid, cb, email, password, location);
+    private void insertUser(String userUid, String email, String name, String location,String password) {
+        Teacher teacher = new Teacher(name, userUid, email, password, location);
         if (bitmap == null) {
             Model.instance.addTeacher(teacher, () -> {
                 Navigation.findNavController(view).navigateUp();
@@ -213,9 +205,8 @@ public class RegristerFragment extends Fragment {
         String location = locationEt.getText().toString();
         String id = idEt.getText().toString();
         String email = emailEt.getText().toString();
-        boolean flag = cb.isChecked();
-        Log.d("TAG", "saved name:" + name + " id:" + id + " email:" + email + " password:" + password + "location" + location + " flag:" + flag);
-        Teacher st = new Teacher(name, id, flag, email, password, location);
+        Log.d("TAG", "saved name:" + name + " id:" + id + " email:" + email + " password:" + password + "location" + location );
+        Teacher st = new Teacher(name, id, email, password, location);
         if (bitmap == null) {
             Model.instance.addTeacher(st, () -> {
                 Navigation.findNavController(view).navigateUp();

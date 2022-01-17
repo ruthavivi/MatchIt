@@ -8,7 +8,7 @@
     tools:context=".ContactInfoFragment" >
 
     <ImageView
-        android:id="@+id/main_avatar_imv"
+        android:id="@+id/teacherEdit_avatar_img"
         android:layout_width="308dp"
         android:layout_height="92dp"
         android:layout_marginStart="8dp"
@@ -29,7 +29,7 @@
         android:text="Name:"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_avatar_imv" />
+        app:layout_constraintTop_toBottomOf="@+id/teacherEdit_avatar_img" />
 
 
     <TextView

@@ -40,20 +40,18 @@ public class Teacher {
     }
 
     public Teacher(){}
-    public Teacher(String name, String id, boolean flag,String email,String password,String location) {
+    public Teacher(String name, String id,String email,String password,String location) {
         this.name = name;
         this.password=password;
         this.id = id;
-        this.flag = flag;
         this.email=email;
         this.location = location;
     }
 
-    public void updateTeacher(String name, boolean flag,String email,String password,String location){
+    public void updateTeacher(String name,String email,String password,String location){
         this.name = name;
         this.location = location;
         this.password=password;
-        this.flag = flag;
         this.email=email;
     }
 
@@ -72,10 +70,6 @@ public class Teacher {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
     }
 
     public void setName(String name) {
@@ -102,10 +96,6 @@ public class Teacher {
         return id;
     }
 
-    public boolean isFlag() {
-        return flag;
-    }
-
     public String getAvatarUtl() {
         return avatarUtl;
     }
@@ -121,7 +111,6 @@ public class Teacher {
         json.put("password", getPassword());
         json.put("email", getEmail());
         json.put("location", getLocation());
-        json.put("flag", isFlag());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
         json.put("avatarUrl",avatarUtl);
         return json;
@@ -136,10 +125,8 @@ public class Teacher {
         String password = (String)json.get("password");
         String location = (String)json.get("location");
         String email = (String)json.get("email");
-        boolean flag = (Boolean) json.get("flag");
-
         String avatarUrl = (String)json.get("avatarUrl");
-        Teacher teacher = new Teacher(name,id,flag,email,password,location);
+        Teacher teacher = new Teacher(name,id,email,password,location);
         Timestamp ts = (Timestamp)json.get(LAST_UPDATED);
         teacher.setLastUpdated(new Long(ts.getSeconds()));
         teacher.setAvatarUtl(avatarUrl);

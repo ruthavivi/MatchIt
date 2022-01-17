@@ -92,7 +92,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         holder.nameTv.setText(teacher.getName());
         holder.locationTv.setText(teacher.getLocation());
         //holder.idTv.setText(teacher.getId());
-        holder.cb.setChecked(teacher.isFlag());
         String url = teacher.getAvatarUtl();
         if (url != null && !url.equals("")){
 
@@ -114,7 +113,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         TextView locationTv;
 
         TextView idTv;
-        CheckBox cb;
 
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
@@ -123,7 +121,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             locationTv = itemView.findViewById(R.id.listrow_location_tv);
 
             //idTv = itemView.findViewById(R.id.listrow_id_tv);
-            cb = itemView.findViewById(R.id.listrow_cb);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -141,7 +138,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             nameTv.setText(teacher.getName());
             //idTv.setText(teacher.getId());
             locationTv.setText(teacher.getLocation());
-            cb.setChecked(teacher.isFlag());
             String url = teacher.getAvatarUtl();
             if (url != null && !url.equals("")){
                 Picasso.get()

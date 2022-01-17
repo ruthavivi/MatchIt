@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 
 public class EditFragment extends Fragment {
@@ -31,13 +33,14 @@ public class EditFragment extends Fragment {
     EditText passwordEt;
     EditText emailEt;
     EditText locationEt;
-    CheckBox cb;
     View view;
     Button saveBtn;
     Button cancelBtn;
     Button deleteBtn;
     Button logoutBtn;
     Teacher teacher;
+    ImageView avatarImg;
+
 
 
     @Override
@@ -53,7 +56,8 @@ public class EditFragment extends Fragment {
         passwordEt = view.findViewById(R.id.edit_password_et);
         locationEt = view.findViewById(R.id.edit_location_et);
         emailEt = view.findViewById(R.id.edit_email_et);
-        cb = view.findViewById(R.id.main_cb);
+        avatarImg = view.findViewById(R.id.teacherEdit_avatar_img);
+
 
 
         String teacherId = EditFragmentArgs.fromBundle(getArguments()).getTeacherId();
@@ -123,7 +127,6 @@ public class EditFragment extends Fragment {
     private void save() {
         teacher.updateTeacher(
                 nameEt.getText().toString(),
-                cb.isChecked(),
                 emailEt.getText().toString(),
                 passwordEt.getText().toString(),
                 locationEt.getText().toString());
@@ -171,7 +174,12 @@ public class EditFragment extends Fragment {
         emailEt.setText(teacher.getEmail());
         passwordEt.setText(teacher.getPassword());
         locationEt.setText(teacher.getLocation());
-        cb.setChecked(teacher.isFlag());
+        if (teacher.getAvatarUtl() != null) {
+            Picasso.get()
+                    .load(teacher.getAvatarUtl())
+                    .placeholder(R.drawable.avatar)
+                    .into(avatarImg);
+        }
     }
 
 
