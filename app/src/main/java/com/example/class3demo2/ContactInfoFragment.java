@@ -20,7 +20,7 @@ public class ContactInfoFragment extends Fragment {
 
     Teacher teacher;
     TextView nameTv;
-    TextView idTv;
+    TextView phoneTv;
     TextView emailTv;
     TextView locationTv;
 
@@ -32,7 +32,7 @@ public class ContactInfoFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_contact_info, container, false);
         Button cancel=view.findViewById(R.id.cancel_contact_btn);
         nameTv=view.findViewById(R.id._name_tv);
-        idTv=view.findViewById(R.id._id_tv);
+        phoneTv=view.findViewById(R.id._phone_tv);
         emailTv=view.findViewById(R.id._email_tv);
         locationTv=view.findViewById(R.id._location_tv);
 
@@ -58,7 +58,7 @@ public class ContactInfoFragment extends Fragment {
     private void updateDisplay() {
         nameTv.setText(teacher.getName());
         emailTv.setText(teacher.getEmail());
-        idTv.setText(teacher.getId());
+        phoneTv.setText(teacher.getPhone());
         locationTv.setText(teacher.getLocation());
 
     }

@@ -27,6 +27,7 @@ public class Teacher {
     String email = "";
     String name = "";
     String password = "";
+    String phone = "";
     boolean flag = false;
     Long lastUpdated = new Long(0);
     String avatarUtl = "";
@@ -40,19 +41,21 @@ public class Teacher {
     }
 
     public Teacher(){}
-    public Teacher(String name, String id,String email,String password,String location) {
+    public Teacher(String name, String id,String email,String password,String location,String phone) {
         this.name = name;
         this.password=password;
         this.id = id;
         this.email=email;
         this.location = location;
+        this.phone=phone;
     }
 
-    public void updateTeacher(String name,String email,String password,String location){
+    public void updateTeacher(String name,String email,String password,String location,String phone){
         this.name = name;
         this.location = location;
         this.password=password;
         this.email=email;
+        this.phone=phone;
     }
 
     public void setEmail(String email) {
@@ -67,6 +70,7 @@ public class Teacher {
         this.password = password;
     }
 
+    public void setPhone(String phone) { this.phone = phone; }
 
     public void setId(String id) {
         this.id = id;
@@ -88,13 +92,13 @@ public class Teacher {
         return password;
     }
 
+    public String getPhone() { return phone; }
+
     public String getEmail() {
         return email;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
     public String getAvatarUtl() {
         return avatarUtl;
@@ -125,8 +129,9 @@ public class Teacher {
         String password = (String)json.get("password");
         String location = (String)json.get("location");
         String email = (String)json.get("email");
+        String phone = (String)json.get("phone");
         String avatarUrl = (String)json.get("avatarUrl");
-        Teacher teacher = new Teacher(name,id,email,password,location);
+        Teacher teacher = new Teacher(name,id,email,password,location,phone);
         Timestamp ts = (Timestamp)json.get(LAST_UPDATED);
         teacher.setLastUpdated(new Long(ts.getSeconds()));
         teacher.setAvatarUtl(avatarUrl);

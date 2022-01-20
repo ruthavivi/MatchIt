@@ -33,6 +33,7 @@ public class EditFragment extends Fragment {
     EditText passwordEt;
     EditText emailEt;
     EditText locationEt;
+    EditText phoneEt;
     View view;
     Button saveBtn;
     Button cancelBtn;
@@ -55,6 +56,7 @@ public class EditFragment extends Fragment {
         nameEt = view.findViewById(R.id.edit_name_et);
         passwordEt = view.findViewById(R.id.edit_password_et);
         locationEt = view.findViewById(R.id.edit_location_et);
+        phoneEt = view.findViewById(R.id.edit_phone_et);
         emailEt = view.findViewById(R.id.edit_email_et);
         avatarImg = view.findViewById(R.id.teacherEdit_avatar_img);
 
@@ -129,7 +131,8 @@ public class EditFragment extends Fragment {
                 nameEt.getText().toString(),
                 emailEt.getText().toString(),
                 passwordEt.getText().toString(),
-                locationEt.getText().toString());
+                locationEt.getText().toString(),
+                phoneEt.getText().toString());
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -174,6 +177,7 @@ public class EditFragment extends Fragment {
         emailEt.setText(teacher.getEmail());
         passwordEt.setText(teacher.getPassword());
         locationEt.setText(teacher.getLocation());
+        phoneEt.setText(teacher.getPhone());
         if (teacher.getAvatarUtl() != null) {
             Picasso.get()
                     .load(teacher.getAvatarUtl())

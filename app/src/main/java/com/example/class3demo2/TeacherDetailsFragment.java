@@ -3,7 +3,6 @@ package com.example.class3demo2;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -26,6 +25,7 @@ public class TeacherDetailsFragment extends Fragment {
     TextView emailTv;
     TextView locationTv;
     TextView idTv;
+    TextView phoneTv;
     ProgressBar progressBar;
     Button machIt;
     Button cancel;
@@ -44,7 +44,8 @@ public class TeacherDetailsFragment extends Fragment {
         nameTv = view.findViewById(R.id.studentdetails_name_tv);
         locationTv = view.findViewById(R.id.studentdetails_location_tv);
         emailTv = view.findViewById(R.id.studentdetails_email_tv);
-        idTv = view.findViewById(R.id.studentdetails_id_tv);
+//        idTv = view.findViewById(R.id.studentdetails_id_tv);
+        phoneTv = view.findViewById(R.id.studentdetails_phone_tv);
         progressBar = view.findViewById(R.id.studentdetails_progressbar);
         progressBar.setVisibility(View.VISIBLE);
         machIt=view.findViewById(R.id.matchIt_btn);
@@ -108,7 +109,8 @@ public class TeacherDetailsFragment extends Fragment {
         nameTv.setText(teacher.getName());
         emailTv.setText(teacher.getEmail());
         locationTv.setText(teacher.getLocation());
-        idTv.setText(teacher.getId());
+        phoneTv.setText(teacher.getPhone());
+        System.out.println(teacher.getPhone());
         if (teacher.getAvatarUtl() != null) {
             Picasso.get()
                     .load(teacher.getAvatarUtl())

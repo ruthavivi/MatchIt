@@ -45,6 +45,7 @@ public class RegristerFragment extends Fragment {
     EditText idEt;
     EditText emailEt;
     EditText locationEt;
+    EditText phoneEt;
     View view;
     ProgressBar progressbar;
     Button registerBtn;
@@ -65,6 +66,7 @@ public class RegristerFragment extends Fragment {
         idEt = view.findViewById(R.id.main_id_et);
         emailEt = view.findViewById(R.id.main_email_et);
         locationEt = view.findViewById(R.id.main_location_et);
+        phoneEt=view.findViewById(R.id.main_phone_et);
         progressbar = view.findViewById(R.id.main_progressbar);
         progressbar.setVisibility(View.GONE);
 
@@ -118,6 +120,7 @@ public class RegristerFragment extends Fragment {
         String location = locationEt.getText().toString();
         String id = idEt.getText().toString();
         String email = emailEt.getText().toString();
+        String phone = phoneEt.getText().toString();
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -128,7 +131,7 @@ public class RegristerFragment extends Fragment {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-                    insertUser(user.getUid(), user.getEmail(), name,location,password);
+                    insertUser(user.getUid(), user.getEmail(), name,location,password,phone);
                 } else {
                     progressbar.setVisibility(View.GONE);
                     // If registration fails, display a message to the user.
@@ -151,8 +154,8 @@ public class RegristerFragment extends Fragment {
 
     }
 
-    private void insertUser(String userUid, String email, String name, String location,String password) {
-        Teacher teacher = new Teacher(name, userUid, email, password, location);
+    private void insertUser(String userUid, String email, String name, String location,String password,String phone) {
+        Teacher teacher = new Teacher(name, userUid, email, password, location,phone);
         if (bitmap == null) {
             Model.instance.addTeacher(teacher, () -> {
                 Navigation.findNavController(view).navigateUp();
@@ -205,8 +208,9 @@ public class RegristerFragment extends Fragment {
         String location = locationEt.getText().toString();
         String id = idEt.getText().toString();
         String email = emailEt.getText().toString();
-        Log.d("TAG", "saved name:" + name + " id:" + id + " email:" + email + " password:" + password + "location" + location );
-        Teacher st = new Teacher(name, id, email, password, location);
+        String phone= emailEt.getText().toString();
+        Log.d("TAG", "saved name:" + name + " id:" + id + " email:" + email + " password:" + password + "location" + location+"phone"+phone );
+        Teacher st = new Teacher(name, id, email, password, location,phone);
         if (bitmap == null) {
             Model.instance.addTeacher(st, () -> {
                 Navigation.findNavController(view).navigateUp();

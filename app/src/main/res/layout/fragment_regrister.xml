@@ -22,8 +22,8 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearLayoutCompat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="396dp"
+        android:layout_height="399dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
@@ -96,6 +96,20 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/main_email_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="phone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/main_phone_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
