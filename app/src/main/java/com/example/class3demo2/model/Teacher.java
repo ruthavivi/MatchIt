@@ -115,6 +115,7 @@ public class Teacher {
         json.put("password", getPassword());
         json.put("email", getEmail());
         json.put("location", getLocation());
+        json.put("phone", getPhone());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
         json.put("avatarUrl",avatarUtl);
         return json;

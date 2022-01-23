@@ -1,5 +1,7 @@
 package com.example.class3demo2;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.class3demo2.model.Model;
 import com.example.class3demo2.model.Teacher;
+import com.squareup.picasso.Picasso;
 
 
 public class ContactInfoFragment extends Fragment {
@@ -23,6 +27,8 @@ public class ContactInfoFragment extends Fragment {
     TextView phoneTv;
     TextView emailTv;
     TextView locationTv;
+    ImageView avatarImg;
+    Button call;
 
 
     @Override
@@ -35,6 +41,17 @@ public class ContactInfoFragment extends Fragment {
         phoneTv=view.findViewById(R.id._phone_tv);
         emailTv=view.findViewById(R.id._email_tv);
         locationTv=view.findViewById(R.id._location_tv);
+        avatarImg = view.findViewById(R.id.teacherEdit_avatar_img);
+        call=view.findViewById(R.id.call);
+
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+teacher.getPhone()));
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -60,6 +77,13 @@ public class ContactInfoFragment extends Fragment {
         emailTv.setText(teacher.getEmail());
         phoneTv.setText(teacher.getPhone());
         locationTv.setText(teacher.getLocation());
+        if (teacher.getAvatarUtl() != null) {
+            Picasso.get()
+                    .load(teacher.getAvatarUtl())
+                    .placeholder(R.drawable.avatar)
+                    .into(avatarImg);
+        }
+
 
     }
 }

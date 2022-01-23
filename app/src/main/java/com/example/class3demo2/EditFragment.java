@@ -1,13 +1,19 @@
 package com.example.class3demo2;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -25,10 +32,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.squareup.picasso.Picasso;
 
 
 public class EditFragment extends Fragment {
+    String photoUrl;
     EditText nameEt;
     EditText passwordEt;
     EditText emailEt;
@@ -40,7 +49,9 @@ public class EditFragment extends Fragment {
     Button deleteBtn;
     Button logoutBtn;
     Teacher teacher;
+    Bitmap bitmap;
     ImageView avatarImg;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
 
@@ -119,10 +130,31 @@ public class EditFragment extends Fragment {
             }
         });
 
+        ImageButton cameraBtn = view.findViewById(R.id.main_camera_btn);
+        cameraBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        });
+
+
 
         return view;
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            bitmap = (Bitmap) bundle.get("data");
+            avatarImg.setImageBitmap(bitmap);
+        }
+    }
+
+
+
 
 
 
@@ -134,7 +166,29 @@ public class EditFragment extends Fragment {
                 locationEt.getText().toString(),
                 phoneEt.getText().toString());
 
+
+
+
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (bitmap == null) {
+
+
+        } else {
+            Model.instance.saveImage(bitmap, user.getUid(), url -> {
+                teacher.setAvatarUtl(url);
+
+
+                //updateDisplay();
+
+
+            });
+        }
+
+
+
+
 
 
 
@@ -169,6 +223,21 @@ public class EditFragment extends Fragment {
                         }
                     }
                 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 

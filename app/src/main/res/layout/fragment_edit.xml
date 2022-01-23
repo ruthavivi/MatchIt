@@ -251,6 +251,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
 
+    <ImageButton
+        android:id="@+id/main_camera_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_menu_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/teacherEdit_avatar_img"
+        app:layout_constraintEnd_toEndOf="@+id/teacherEdit_avatar_img" />
+
 
     <!--    <ProgressBar-->
 <!--        android:id="@+id/main_progressbar"-->
