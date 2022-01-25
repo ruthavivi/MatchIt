@@ -164,7 +164,9 @@ public class EditFragment extends Fragment {
                 emailEt.getText().toString(),
                 passwordEt.getText().toString(),
                 locationEt.getText().toString(),
-                phoneEt.getText().toString());
+                phoneEt.getText().toString()
+
+        );
 
 
 
@@ -173,18 +175,19 @@ public class EditFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (bitmap == null) {
+            Model.instance.addTeacher(teacher, () -> {
 
-
+            });
         } else {
             Model.instance.saveImage(bitmap, user.getUid(), url -> {
                 teacher.setAvatarUtl(url);
+                Model.instance.addTeacher(teacher, () -> {
 
-
-                //updateDisplay();
-
+                });
 
             });
         }
+
 
 
 
@@ -223,6 +226,8 @@ public class EditFragment extends Fragment {
                         }
                     }
                 });
+
+
 
 
 

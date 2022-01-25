@@ -58,16 +58,7 @@ public class Model {
         return teachersListLd;
     }
 
-    public interface AddTeacherListener {
-        void onComplete();
-    }
-    public void addTeacher(Teacher teacher, AddTeacherListener listener){
-        modelFirebase.addTeacher(teacher,()->{
-            reloadTeachersList();
-            listener.onComplete();
-        });
 
-    }
 
 
     public interface DeleteTeacherListener {
@@ -101,12 +92,23 @@ public class Model {
           });
         });
     }
+    public interface AddTeacherListener {
+        void onComplete();
+    }
+    public void addTeacher(Teacher teacher, AddTeacherListener listener){
+        modelFirebase.addTeacher(teacher,()->{
+            reloadTeachersList();
+            listener.onComplete();
+        });
+
+    }
 
     public interface UpdateTeacherListener {
         void onComplete();
         void onError(Exception e);
     }
     public void updateTeacher(Teacher teacher,UpdateTeacherListener listener){
+
         modelFirebase.updateTeacher(teacher, new UpdateTeacherListener() {
             @Override
             public void onComplete() {

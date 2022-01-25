@@ -28,7 +28,6 @@ public class Teacher {
     String name = "";
     String password = "";
     String phone = "";
-    boolean flag = false;
     Long lastUpdated = new Long(0);
     String avatarUtl = "";
 
