@@ -142,5 +142,13 @@
         app:layout_constraintStart_toEndOf="@+id/cancel_contact_btn"
         app:layout_constraintTop_toTopOf="@+id/cancel_contact_btn" />
 
+    <Button
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email"
+        app:layout_constraintStart_toEndOf="@+id/call"
+        app:layout_constraintTop_toTopOf="@+id/call" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

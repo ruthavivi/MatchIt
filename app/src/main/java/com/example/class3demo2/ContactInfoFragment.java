@@ -29,6 +29,7 @@ public class ContactInfoFragment extends Fragment {
     TextView locationTv;
     ImageView avatarImg;
     Button call;
+    Button email;
 
 
     @Override
@@ -43,6 +44,7 @@ public class ContactInfoFragment extends Fragment {
         locationTv=view.findViewById(R.id._location_tv);
         avatarImg = view.findViewById(R.id.teacherEdit_avatar_img);
         call=view.findViewById(R.id.call);
+        email=view.findViewById(R.id.email);
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +52,17 @@ public class ContactInfoFragment extends Fragment {
                 Intent intent= new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:"+teacher.getPhone()));
                 startActivity(intent);
+            }
+        });
+
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto",teacher.getEmail(), null));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "substitute teacher");
+                intent.putExtra(Intent.EXTRA_TEXT, "hey i am looking for a replacement teacher, are you available?");
+                startActivity(Intent.createChooser(intent, "Choose an Email client :"));
             }
         });
 
