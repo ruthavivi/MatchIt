@@ -73,6 +73,7 @@ public class RegristerFragment extends Fragment {
         progressbar.setVisibility(View.GONE);
 
 
+
         registerBtn = view.findViewById(R.id.main_register2_btn);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
