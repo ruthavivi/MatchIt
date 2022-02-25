@@ -125,33 +125,33 @@ public class ModelFirebase {
 
     }
 
-    public void getTeachersByLocation(String location,Long since, Model.GetTeachersByLocationListener listener) {
-        db.collection("teachers")
-                .whereGreaterThanOrEqualTo(Teacher.LAST_UPDATED, new Timestamp(since, 0))
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                LinkedList<Teacher> teachersList = new LinkedList<Teacher>();
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot doc : task.getResult()) {
-                        Teacher s = Teacher.fromJson(doc.getData());
-                        if (s.location == location) {
-                            teachersList.add(s);
-                        }
-                    }
-                } else {
-
-                }
-                listener.onComplete(teachersList);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                listener.onComplete(null);
-            }
-        });
-
-    }
+//    public void getTeachersByLocation(String location,Long since, Model.GetTeachersByLocationListener listener) {
+//        db.collection("teachers")
+//                .whereGreaterThanOrEqualTo(Teacher.LAST_UPDATED, new Timestamp(since, 0))
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                LinkedList<Teacher> teachersList = new LinkedList<Teacher>();
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot doc : task.getResult()) {
+//                        Teacher s = Teacher.fromJson(doc.getData());
+//                        if (s.location == location) {
+//                            teachersList.add(s);
+//                        }
+//                    }
+//                } else {
+//
+//                }
+//                listener.onComplete(teachersList);
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                listener.onComplete(null);
+//            }
+//        });
+//
+//    }
 
     public void saveImage(Bitmap bitmap, String name, Model.SaveImageListener listener) {
         FirebaseStorage storage = FirebaseStorage.getInstance();

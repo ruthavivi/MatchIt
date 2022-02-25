@@ -134,18 +134,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
 
 
-        public void bind(Teacher teacher){
-            nameTv.setText(teacher.getName());
-            //idTv.setText(teacher.getId());
-            locationTv.setText(teacher.getLocation());
-            String url = teacher.getAvatarUtl();
-            if (url != null && !url.equals("")){
-                Picasso.get()
-                        .load(url)
-                        .placeholder(R.drawable.avatar)
-                        .into(avatarImg);
-            }
-        }
+//        public void bind(Teacher teacher){
+//            nameTv.setText(teacher.getName());
+//            //idTv.setText(teacher.getId());
+//            locationTv.setText(teacher.getLocation());
+//            String url = teacher.getAvatarUtl();
+//            if (url != null && !url.equals("")){
+//                Picasso.get()
+//                        .load(url)
+//                        .placeholder(R.drawable.avatar)
+//                        .into(avatarImg);
+//            }
+//        }
     }
 
 
