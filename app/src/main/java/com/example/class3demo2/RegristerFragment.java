@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,7 @@ public class RegristerFragment extends Fragment {
     Button cancelBtn;
     ImageView avatar;
     Bitmap bitmap;
+    Boolean flag=true;
 
 
     @Override
@@ -106,7 +108,9 @@ public class RegristerFragment extends Fragment {
             Bundle bundle = data.getExtras();
             bitmap = (Bitmap) bundle.get("data");
             avatar.setImageBitmap(bitmap);
+
         }
+
     }
 
 
@@ -139,6 +143,7 @@ public class RegristerFragment extends Fragment {
                     if(getContext()!= null){
                     Toast.makeText(getContext(), "Authentication failed."+task.getException().getMessage(),
                             Toast.LENGTH_SHORT).show();
+                        registerBtn.setEnabled(true);
                     }
                 }
 
@@ -155,12 +160,30 @@ public class RegristerFragment extends Fragment {
     }
 
     private void insertUser(String userUid, String email, String name, String location,String password,String phone) {
-        Teacher teacher = new Teacher(name, userUid, email, password, location,phone);
+        Teacher teacher;
+        teacher= new Teacher(name, userUid, email, password, location,phone);
         if (bitmap == null) {
-            Model.instance.addTeacher(teacher, () -> {
-                Navigation.findNavController(view).navigateUp();
+            bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.avatar);
+            avatar.setImageBitmap(bitmap);
+
+            Model.instance.saveImage(bitmap, userUid, url -> {
+                teacher.setAvatarUtl(url);
+                Model.instance.addTeacher(teacher, () -> {
+                    Navigation.findNavController(view).navigateUp();
+                });
             });
+
+
+//            Model.instance.saveImage(teacher, () -> {
+//                teacher.setAvatarUtl("");
+//                Model.instance.addTeacher(teacher, () -> {
+//                    Navigation.findNavController(view).navigateUp();
+//                });
+//
+//            });
         } else {
+            flag=true;
+
             Model.instance.saveImage(bitmap, userUid, url -> {
                 teacher.setAvatarUtl(url);
                 Model.instance.addTeacher(teacher, () -> {
@@ -168,7 +191,8 @@ public class RegristerFragment extends Fragment {
                 });
             });
         }
-        FirebaseFirestore.getInstance().collection("teachers").document(userUid).set(teacher.toJson())
+
+            FirebaseFirestore.getInstance().collection("teachers").document(userUid).set(teacher.toJson())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -187,13 +211,17 @@ public class RegristerFragment extends Fragment {
                             // If sign in fails, display a message to the user.
                             Log.w("RegisterFragment", "insertUser:failure", task.getException());
                             if(getContext()!= null){
-                            Toast.makeText(getContext(), "insertUser failed.",
-                                    Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "insertUser failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                registerBtn.setEnabled(true);
                             }
                         }
 
                     }
                 });
+
+
+
 
     }
 
