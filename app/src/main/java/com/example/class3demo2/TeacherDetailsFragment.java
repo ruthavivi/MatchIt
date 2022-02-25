@@ -117,6 +117,7 @@ public class TeacherDetailsFragment extends Fragment {
                     .placeholder(R.drawable.avatar)
                     .into(avatarImg);
         }
+
         progressBar.setVisibility(View.GONE);
     }
 }
