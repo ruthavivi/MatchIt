@@ -21,6 +21,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.class3demo2.model.Model;
 import com.example.class3demo2.model.Teacher;
 import com.example.class3demo2.teacheradapter.MyAdapter;
 
@@ -83,8 +85,8 @@ public class TeachersListFragment extends Fragment {
 
     private void refreshData() {
 //        swipeRefresh.setRefreshing(true);
-
-
+//
+//
 //        Model.instance.getAllTeachers(new Model.GetAllTeachersListener() {
 //            @Override
 //            public void onComplete(List<Teacher> d) {

@@ -80,13 +80,7 @@ public class EditFragment extends Fragment {
         });
 
 
-//        cancelBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
-//            }
-//        });
+
 
 
         saveBtn.setOnClickListener(new View.OnClickListener() {

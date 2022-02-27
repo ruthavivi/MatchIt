@@ -44,17 +44,7 @@ public class BaseActivity extends AppCompatActivity {
                     navCtrl.navigateUp();
                     return true;
 
-//                case R.id.menu_settings:
-////                    SettingsDialogFragment dialog = new SettingsDialogFragment();
-//                    DatePickerFragment dialog = new DatePickerFragment();
-//                    dialog.setOnDatePickerFragmentListener(new DatePickerFragment.DatePickerFragmentListener() {
-//                        @Override
-//                        public void onDateSet(int year, int month, int dayOfMonth) {
-//                            Log.d("TAG","date was set " + year+ " / " + month + " / " + dayOfMonth);
-//                        }
-//                    });
-//                    dialog.show(getSupportFragmentManager(), "TAG");
-//                    return true;
+
 
 
                 default:
