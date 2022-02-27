@@ -73,6 +73,13 @@ public class logInFragment extends Fragment {
 
         String email = emailET.getText().toString();
         String password = passwordET.getText().toString();
+        if (password.length()==0 || email.length()==0)
+        {
+            logInBTN.setEnabled(true);
+            Toast.makeText(getContext(), "Authentication failed. Please fill all the fields.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         mAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
