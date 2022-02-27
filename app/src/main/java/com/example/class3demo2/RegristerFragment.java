@@ -127,6 +127,16 @@ public class RegristerFragment extends Fragment {
         String email = emailEt.getText().toString();
         String phone = phoneEt.getText().toString();
 
+        if (password.length()==0 || email.length()==0||name.length()==0||location.length()==0||phone.length()==0)
+        {
+            registerBtn.setEnabled(true);
+            Toast.makeText(getContext(), "Authentication failed. Please fill all the fields.",
+                    Toast.LENGTH_SHORT).show();
+            progressbar.setVisibility(View.GONE);
+            return;
+
+        }
+
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -163,7 +173,9 @@ public class RegristerFragment extends Fragment {
     private void insertUser(String userUid, String email, String name, String location,String password,String phone) {
         Teacher teacher;
         teacher= new Teacher(name, userUid, email, password, location,phone);
-        if (bitmap == null) {
+
+
+         if (bitmap == null) {
             bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.avatar);
             avatar.setImageBitmap(bitmap);
 
@@ -227,33 +239,42 @@ public class RegristerFragment extends Fragment {
     }
 
 
-    private void save() {
-        progressbar.setVisibility(View.VISIBLE);
-        registerBtn.setEnabled(false);
-        cancelBtn.setEnabled(false);
-
-        String name = nameEt.getText().toString();
-        String password = passwordEt.getText().toString();
-        String location = locationEt.getText().toString();
-        String id = idEt.getText().toString();
-        String email = emailEt.getText().toString();
-        String phone= emailEt.getText().toString();
-        Log.d("TAG", "saved name:" + name + " id:" + id + " email:" + email + " password:" + password + "location" + location+"phone"+phone );
-        Teacher st = new Teacher(name, id, email, password, location,phone);
-        if (bitmap == null) {
-            Model.instance.addTeacher(st, () -> {
-                Navigation.findNavController(view).navigateUp();
-            });
-        } else {
-            Model.instance.saveImage(bitmap, id, url -> {
-                st.setAvatarUtl(url);
-                Model.instance.addTeacher(st, () -> {
-                    Navigation.findNavController(view).navigateUp();
-                });
-            });
-        }
-//        Model.instance.addTeacher(st, () -> {
-//            Navigation.findNavController(view).navigateUp();
-//        });
-    }
+//    private void save() {
+//        progressbar.setVisibility(View.VISIBLE);
+//        registerBtn.setEnabled(false);
+//        cancelBtn.setEnabled(false);
+//
+//        String name = nameEt.getText().toString();
+//        String password = passwordEt.getText().toString();
+//        String location = locationEt.getText().toString();
+//        String id = idEt.getText().toString();
+//        String email = emailEt.getText().toString();
+//        String phone= emailEt.getText().toString();
+//        Log.d("TAG", "saved name:" + name + " id:" + id + " email:" + email + " password:" + password + "location" + location+"phone"+phone );
+//        Teacher st = new Teacher(name, id, email, password, location,phone);
+//        if (bitmap == null) {
+//            Model.instance.addTeacher(st, () -> {
+//                Navigation.findNavController(view).navigateUp();
+//            });
+//        } else {
+//            Model.instance.saveImage(bitmap, id, url -> {
+//                st.setAvatarUtl(url);
+//                Model.instance.addTeacher(st, () -> {
+//                    Navigation.findNavController(view).navigateUp();
+//                });
+//            });
+//        }
+//
+//
+//        if (password.length()==0 || email.length()==0||name.length()==0||id.length()==0||location.length()==0||phone.length()==0)
+//        {
+//            registerBtn.setEnabled(true);
+//            Toast.makeText(getContext(), "Authentication failed. Please fill all the fields.",
+//                    Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+////        Model.instance.addTeacher(st, () -> {
+////            Navigation.findNavController(view).navigateUp();
+////        });
+//    }
 }

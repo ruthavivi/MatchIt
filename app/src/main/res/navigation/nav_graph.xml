@@ -26,17 +26,9 @@
             android:id="@+id/action_teacherDetailsFragment_to_contactInfoFragment"
             app:destination="@id/contactInfoFragment" />
         <action
-            android:id="@+id/action_teacherDetailsFragment_to_editFragment"
-            app:destination="@id/editFragment" />
-        <action
             android:id="@+id/action_teacherDetailsFragment_pop"
             app:popUpTo="@id/logInFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/regristerFragment"
-        android:name="com.example.class3demo2.AddTeacherFragment"
-        android:label="Add Teacher"
-        tools:layout="@layout/fragment_add_teacher"/><action android:id="@+id/action_global_addTeacherFragment" app:destination="@id/regristerFragment"/>
     <fragment
         android:id="@+id/firstPageFragment"
         android:name="com.example.class3demo2.FirstPageFragment"
@@ -52,11 +44,11 @@
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
-            android:id="@+id/action_logInFragment_to_regristerFragment"
-            app:destination="@id/regristerFragment" />
-        <action
             android:id="@+id/action_logInFragment_to_editFragment"
             app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_regristerFragment"
+            app:destination="@id/regristerFragment" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
@@ -79,12 +71,6 @@
             android:name="teacherId"
             app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.example.class3demo2.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
-    <action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment" />
     <action android:id="@+id/action_global_teachersListFragment" app:destination="@id/teachersListFragment" />
     <action android:id="@+id/action_global_editFragment" app:destination="@id/editFragment" />
     <fragment
@@ -92,6 +78,5 @@
         android:name="com.example.class3demo2.RegristerFragment"
         android:label="fragment_regrister"
         tools:layout="@layout/fragment_regrister" />
-    <action android:id="@+id/action_global_regristerFragment" app:destination="@id/regristerFragment" />
     <action android:id="@+id/action_global_logInFragment" app:destination="@id/logInFragment" />
 </navigation>
