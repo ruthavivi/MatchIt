@@ -184,7 +184,7 @@ public class RegristerFragment extends Fragment {
 
 
         } else {
-            flag=true;
+            //flag=true;
 
             Model.instance.saveImage(bitmap, userUid, url -> {
                 teacher.setAvatarUtl(url);
