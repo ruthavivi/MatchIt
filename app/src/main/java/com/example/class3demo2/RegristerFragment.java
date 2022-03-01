@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -168,7 +167,7 @@ public class RegristerFragment extends Fragment {
 
     private void insertUser(String userUid, String email, String name, String location,String password,String phone) {
         Teacher teacher;
-        teacher= new Teacher(name, userUid, email, password, location,phone);
+        teacher= new Teacher(name, userUid, email, password, location,phone,false);
 
 
          if (bitmap == null) {

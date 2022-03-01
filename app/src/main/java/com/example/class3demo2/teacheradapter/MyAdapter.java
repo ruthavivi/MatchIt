@@ -3,7 +3,6 @@ package com.example.class3demo2.teacheradapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -13,14 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.class3demo2.R;
-import com.example.class3demo2.TeachersListFragment;
-import com.example.class3demo2.TeachersListFragmentViewModel;
 import com.example.class3demo2.model.Teacher;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements Filterable {

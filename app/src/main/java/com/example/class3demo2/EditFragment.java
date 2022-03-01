@@ -5,7 +5,6 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,11 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.class3demo2.model.Model;
@@ -32,7 +29,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.squareup.picasso.Picasso;
 
 
@@ -95,20 +91,7 @@ public class EditFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Model.instance.deleteTeacher(teacher, () -> {
-                    //Navigation.findNavController(view).navigateUp();
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                    user.delete()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d(TAG, "User account deleted.");
-                                    }
-                                }
-                            });
                     Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
-
                 });
 
             }

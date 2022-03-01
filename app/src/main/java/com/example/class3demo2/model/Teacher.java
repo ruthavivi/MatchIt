@@ -30,6 +30,7 @@ public class Teacher {
     String phone = "";
     Long lastUpdated = new Long(0);
     String avatarUtl = "";
+    boolean isDeleted = false;
 
     public void setLastUpdated(Long lastUpdated) {
         this.lastUpdated = lastUpdated;
@@ -39,14 +40,16 @@ public class Teacher {
         return lastUpdated;
     }
 
-    public Teacher(){}
-    public Teacher(String name, String id,String email,String password,String location,String phone) {
+//    public Teacher(){}
+
+    public Teacher(String name, String id,String email,String password,String location,String phone,boolean isDeleted) {
         this.name = name;
         this.password=password;
         this.id = id;
         this.email=email;
         this.location = location;
         this.phone=phone;
+        this.isDeleted=isDeleted;
     }
 
     public void updateTeacher(String name,String email,String password,String location,String phone){
@@ -117,6 +120,7 @@ public class Teacher {
         json.put("phone", getPhone());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
         json.put("avatarUrl",avatarUtl);
+        json.put("is_deleted",isDeleted);
         return json;
     }
 
@@ -131,7 +135,8 @@ public class Teacher {
         String email = (String)json.get("email");
         String phone = (String)json.get("phone");
         String avatarUrl = (String)json.get("avatarUrl");
-        Teacher teacher = new Teacher(name,id,email,password,location,phone);
+        boolean isDeleted = (boolean) json.get("is_deleted");
+        Teacher teacher = new Teacher(name,id,email,password,location,phone,isDeleted);
         Timestamp ts = (Timestamp)json.get(LAST_UPDATED);
         teacher.setLastUpdated(new Long(ts.getSeconds()));
         teacher.setAvatarUtl(avatarUrl);

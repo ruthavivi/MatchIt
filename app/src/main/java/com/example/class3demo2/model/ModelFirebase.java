@@ -24,6 +24,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class ModelFirebase {
@@ -39,12 +40,14 @@ public class ModelFirebase {
 
     public void getAllTeachers(Long since, Model.GetAllTeachersListener listener) {
         db.collection("teachers")
+                //.whereEqualTo("is_deleted",false)
                 .whereGreaterThanOrEqualTo(Teacher.LAST_UPDATED, new Timestamp(since, 0))
+
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 LinkedList<Teacher> teachersList = new LinkedList<Teacher>();
-                if (task.isSuccessful()) {
+                if (task.isSuccessful() && task.getResult() != null) {
                     for (QueryDocumentSnapshot doc : task.getResult()) {
                         Teacher s = Teacher.fromJson(doc.getData());
                         if (s != null) {
@@ -78,7 +81,8 @@ public class ModelFirebase {
 
     public void deleteTeacher(Teacher teacher, Model.DeleteTeacherListener listener) {
         db.collection("teachers")
-                .document(teacher.getId()).delete()
+                .document(teacher.getId())
+                .set(new HashMap<String,Boolean>(){{ put("is_deleted",true); }})
                 .addOnSuccessListener((successListener) -> {
                     listener.onComplete();
                 })

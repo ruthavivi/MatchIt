@@ -14,7 +14,8 @@ public class Model {
     public static final Model instance = new Model();
 
     ModelFirebase modelFirebase = new ModelFirebase();
-    private Model(){
+
+    private Model() {
         reloadTeachersList();
     }
 
@@ -28,44 +29,49 @@ public class Model {
 
 
     MutableLiveData<List<Teacher>> teachersListLd = new MutableLiveData<List<Teacher>>();
+
     private void reloadTeachersList() {
         //1. get local last update
         Long localLastUpdate = Teacher.getLocalLastUpdated();
-        Log.d("TAG","localLastUpdate: " + localLastUpdate);
+        Log.d("TAG", "localLastUpdate: " + localLastUpdate);
         //2. get all students record since local last update from firebase
-        modelFirebase.getAllTeachers(localLastUpdate,(list)->{
-            MyApplication.executorService.execute(()->{
+        modelFirebase.getAllTeachers(localLastUpdate, (list) -> {
+            MyApplication.executorService.execute(() -> {
                 //3. update local last update date
                 //4. add new records to the local db
-                Long lLastUpdate = new Long(0);
-                Log.d("TAG", "FB returned " + list.size());
-                for(Teacher s : list){
-                    AppLocalDB.db.teacherDao().insertAll(s);
-                    if (s.getLastUpdated() > lLastUpdate){
-                        lLastUpdate = s.getLastUpdated();
-                    }
-                }
-                Teacher.setLocalLastUpdated(lLastUpdate);
 
-                //5. return all records to the caller
-                List<Teacher> stList = AppLocalDB.db.teacherDao().getAll();
-                teachersListLd.postValue(stList);
+                if (list != null && list.size() > 0) {
+                    Log.d("TAG", "FB returned " + list.size());
+                    Long lLastUpdate = new Long(0);
+                    for (Teacher s : list) {
+                        AppLocalDB.db.teacherDao().insertAll(s);
+                        if (s.getLastUpdated() > lLastUpdate) {
+                            lLastUpdate = s.getLastUpdated();
+                        }
+                    }
+                    Teacher.setLocalLastUpdated(lLastUpdate);
+
+                    //5. return all records to the caller
+                    List<Teacher> stList = AppLocalDB.db.teacherDao().getAll();
+                    teachersListLd.postValue(stList);
+                }
+
+
             });
         });
     }
 
-    public LiveData<List<Teacher>> getAll(){
+    public LiveData<List<Teacher>> getAll() {
         return teachersListLd;
     }
-
-
 
 
     public interface DeleteTeacherListener {
         void onComplete();
     }
-    public void deleteTeacher(Teacher teacher, DeleteTeacherListener listener){
-        modelFirebase.deleteTeacher(teacher,()->{
+
+    public void deleteTeacher(Teacher teacher, DeleteTeacherListener listener) {
+        modelFirebase.deleteTeacher(teacher, () -> {
             MyApplication.executorService.execute(() -> {
                 AppLocalDB.db.teacherDao().delete(teacher);
                 MyApplication.mainHandler.post(() -> {
@@ -80,23 +86,26 @@ public class Model {
     public interface GetTeacherByIdListener {
         void onComplete(Teacher teacher);
     }
+
     public void getTeacherById(String teacherId, GetTeacherByIdListener listener) {
         MyApplication.executorService.execute(() -> {
-          Teacher teacher = AppLocalDB.db.teacherDao().getTeacherById(teacherId);
-          MyApplication.mainHandler.post(() -> {
-              if(teacher!= null){
-                  listener.onComplete(teacher);
-                  return;
-              }
-              modelFirebase.getTeacherById(teacherId, listener);
-          });
+            Teacher teacher = AppLocalDB.db.teacherDao().getTeacherById(teacherId);
+            MyApplication.mainHandler.post(() -> {
+                if (teacher != null) {
+                    listener.onComplete(teacher);
+                    return;
+                }
+                modelFirebase.getTeacherById(teacherId, listener);
+            });
         });
     }
+
     public interface AddTeacherListener {
         void onComplete();
     }
-    public void addTeacher(Teacher teacher, AddTeacherListener listener){
-        modelFirebase.addTeacher(teacher,()->{
+
+    public void addTeacher(Teacher teacher, AddTeacherListener listener) {
+        modelFirebase.addTeacher(teacher, () -> {
             reloadTeachersList();
             listener.onComplete();
         });
@@ -105,9 +114,11 @@ public class Model {
 
     public interface UpdateTeacherListener {
         void onComplete();
+
         void onError(Exception e);
     }
-    public void updateTeacher(Teacher teacher,UpdateTeacherListener listener){
+
+    public void updateTeacher(Teacher teacher, UpdateTeacherListener listener) {
 
         modelFirebase.updateTeacher(teacher, new UpdateTeacherListener() {
             @Override
@@ -131,10 +142,11 @@ public class Model {
     }
 
 
-    public interface SaveImageListener{
+    public interface SaveImageListener {
         void onComplete(String url);
     }
+
     public void saveImage(Bitmap bitmap, String name, SaveImageListener listener) {
-        modelFirebase.saveImage(bitmap,name,listener);
+        modelFirebase.saveImage(bitmap, name, listener);
     }
 }
