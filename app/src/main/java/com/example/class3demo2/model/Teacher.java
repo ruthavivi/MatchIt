@@ -60,6 +60,12 @@ public class Teacher {
         this.phone=phone;
     }
 
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+
     public void setEmail(String email) {
         this.email = email;
     }

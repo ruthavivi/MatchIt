@@ -60,7 +60,7 @@
             app:argType="string" />
         <action
             android:id="@+id/action_editFragment_pop"
-            app:popUpTo="@id/logInFragment" />
+            app:popUpTo="@id/firstPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactInfoFragment"

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.class3demo2.MyApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
@@ -42,7 +43,7 @@ public class Model {
 
                 if (list != null && list.size() > 0) {
                     Log.d("TAG", "FB returned " + list.size());
-                    Long lLastUpdate = new Long(0);
+                    Long lLastUpdate = 0L;
                     for (Teacher s : list) {
                         AppLocalDB.db.teacherDao().insertAll(s);
                         if (s.getLastUpdated() > lLastUpdate) {
@@ -52,8 +53,12 @@ public class Model {
                     Teacher.setLocalLastUpdated(lLastUpdate);
 
                     //5. return all records to the caller
-                    List<Teacher> stList = AppLocalDB.db.teacherDao().getAll();
+                    List<Teacher> stList = AppLocalDB.db.teacherDao().getAllActiveTeachers();
                     teachersListLd.postValue(stList);
+                }
+
+                else {
+                    teachersListLd.postValue(new ArrayList<>());
                 }
 
 
@@ -73,7 +78,7 @@ public class Model {
     public void deleteTeacher(Teacher teacher, DeleteTeacherListener listener) {
         modelFirebase.deleteTeacher(teacher, () -> {
             MyApplication.executorService.execute(() -> {
-                AppLocalDB.db.teacherDao().delete(teacher);
+                AppLocalDB.db.teacherDao().updateTeacher(teacher);
                 MyApplication.mainHandler.post(() -> {
                     reloadTeachersList();
                     listener.onComplete();

@@ -90,7 +90,10 @@ public class EditFragment extends Fragment {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                teacher.setDeleted(true);
                 Model.instance.deleteTeacher(teacher, () -> {
+                    FirebaseAuth.getInstance().signOut();
+
                     Navigation.findNavController(view).navigate(R.id.action_editFragment_pop);
                 });
 

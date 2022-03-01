@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -82,7 +83,7 @@ public class ModelFirebase {
     public void deleteTeacher(Teacher teacher, Model.DeleteTeacherListener listener) {
         db.collection("teachers")
                 .document(teacher.getId())
-                .set(new HashMap<String,Boolean>(){{ put("is_deleted",true); }})
+                .set(new HashMap<String,Boolean>(){{ put("is_deleted",true); }}, SetOptions.merge())
                 .addOnSuccessListener((successListener) -> {
                     listener.onComplete();
                 })

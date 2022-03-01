@@ -15,6 +15,9 @@ public interface TeacherDao {
     @Query("select * from Teacher")
     List<Teacher> getAll();
 
+    @Query("select * from Teacher where `isDeleted` = 0")
+    List<Teacher> getAllActiveTeachers();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Teacher... teachers);
 
