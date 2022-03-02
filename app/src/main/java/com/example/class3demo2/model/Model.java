@@ -31,7 +31,7 @@ public class Model {
 
     MutableLiveData<List<Teacher>> teachersListLd = new MutableLiveData<List<Teacher>>();
 
-    private void reloadTeachersList() {
+    public void reloadTeachersList() {
         //1. get local last update
         Long localLastUpdate = Teacher.getLocalLastUpdated();
         Log.d("TAG", "localLastUpdate: " + localLastUpdate);
